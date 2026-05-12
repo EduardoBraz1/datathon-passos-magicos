@@ -87,8 +87,19 @@ def _rolling_features(panel: pd.DataFrame, year_t: int) -> pd.DataFrame:
 _ZSCORE_INDICATORS = ["INDE", "IAA", "IEG", "IPS", "IDA", "IPV"]
 
 
+_EPS = 1e-6
+_RATIO_TOP_FEATURES = ("Defasagem", "Idade", "IPV")
+
+
 def _interactions(curr: pd.DataFrame) -> pd.DataFrame:
-    """Hand-crafted interactions known to be predictive from EDA."""
+    """Hand-crafted interactions known to be predictive from EDA, plus the
+    2nd-order interactions requested in iter4:
+
+    * Ratios between related indicators (with ``*_was_zero`` flag).
+    * Quadratic and ``log1p`` transforms of the three top-SHAP features
+      (``Defasagem``, ``Idade``, ``IPV``) — sometimes recover monotonicity
+      that a shallow GBM otherwise approximates with multiple splits.
+    """
     out = pd.DataFrame(index=curr.index)
     out["gap_Mat_Por"] = curr["Mat"] - curr["Por"]
     out["gap_Mat_Ing"] = curr["Mat"] - curr["Ing"]
@@ -98,6 +109,25 @@ def _interactions(curr: pd.DataFrame) -> pd.DataFrame:
     g = curr.groupby("Fase")["INDE"]
     out["inde_z_fase"] = (curr["INDE"] - g.transform("mean")) / g.transform("std").replace(0, np.nan)
     out["age_fase_excess"] = curr["Idade"] - (curr["Fase"] + 6).astype("float64")
+
+    # Ratios (with epsilon and "was_zero" flag for denominator).
+    ratio_pairs = [
+        ("IDA", "INDE"), ("IPS", "IAA"), ("Mat", "Por"),
+        ("Por", "Ing"), ("IPV", "IEG"),
+    ]
+    for num, den in ratio_pairs:
+        den_vals = curr[den].astype("float64")
+        out[f"ratio_{num}_{den}"] = curr[num].astype("float64") / (den_vals.abs() + _EPS)
+        out[f"ratio_{num}_{den}_was_zero"] = (den_vals.abs() < _EPS).astype("int8")
+
+    # Quadratic + log1p on top-SHAP features.  log1p uses |x| so negative
+    # values (deltas can be negative for log1p inputs we never feed negative
+    # bases below — Defasagem ≥ 0, Idade ≥ 6, IPV ∈ [0, 10]).
+    for col in _RATIO_TOP_FEATURES:
+        if col in curr.columns:
+            v = curr[col].astype("float64")
+            out[f"{col}_sq"] = v ** 2
+            out[f"{col}_log1p"] = np.log1p(v.clip(lower=0))
     return out
 
 

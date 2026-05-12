@@ -1,0 +1,173 @@
+{
+  "timestamp": "20260512T122252",
+  "elapsed_seconds": 33.62507700920105,
+  "composite_iter3_baseline": {
+    "roc_auc": 0.7584,
+    "pr_auc": 0.8427,
+    "brier": 0.2001,
+    "f1_at_train_threshold": 0.7913,
+    "recall_at_top_decile": 0.1423
+  },
+  "composite_iter4": {
+    "B_LGBM_interactions": {
+      "n": 765,
+      "prevalence": 0.6522875816993464,
+      "roc_auc": 0.7729255503488179,
+      "pr_auc": 0.8493453288718238,
+      "brier": 0.1966211746405483,
+      "f1_at_train_threshold": 0.7911040508339953,
+      "recall_at_top_decile": 0.14228456913827656
+    },
+    "C_DART": {
+      "n": 765,
+      "prevalence": 0.6522875816993464,
+      "roc_auc": 0.7128392122591045,
+      "pr_auc": 0.8027807865128135,
+      "brier": 0.2144742573874145,
+      "f1_at_train_threshold": 0.7818343722172751,
+      "recall_at_top_decile": 0.1342685370741483
+    },
+    "D_GOSS": {
+      "n": 765,
+      "prevalence": 0.6522875816993464,
+      "roc_auc": 0.7552172013199331,
+      "pr_auc": 0.8494173465417274,
+      "brier": 0.19849514847020597,
+      "f1_at_train_threshold": 0.7895569620253164,
+      "recall_at_top_decile": 0.1462925851703407
+    },
+    "A_PerFase": {
+      "n": 765,
+      "prevalence": 0.6522875816993464,
+      "roc_auc": 0.738032455889222,
+      "pr_auc": 0.8295649663245996,
+      "brier": 0.19694161761573914,
+      "f1_at_train_threshold": 0.7892976588628763,
+      "recall_at_top_decile": 0.13627254509018036
+    },
+    "E_RankAvg_B_LGBM_interactions_C_DART": {
+      "n": 765,
+      "prevalence": 0.6522875816993464,
+      "roc_auc": 0.7548103726249491,
+      "pr_auc": 0.8363473613641929,
+      "brier": 0.21569035176404136,
+      "f1_at_train_threshold": 0.791907514450867,
+      "recall_at_top_decile": 0.13627254509018036
+    },
+    "E_RankAvg_B_LGBM_interactions_A_PerFase": {
+      "n": 765,
+      "prevalence": 0.6522875816993464,
+      "roc_auc": 0.7660659665195051,
+      "pr_auc": 0.8520047388053997,
+      "brier": 0.2094013891087641,
+      "f1_at_train_threshold": 0.7944936086529006,
+      "recall_at_top_decile": 0.13827655310621242
+    },
+    "E_RankAvg_C_DART_D_GOSS": {
+      "n": 765,
+      "prevalence": 0.6522875816993464,
+      "roc_auc": 0.7499208944204196,
+      "pr_auc": 0.8380075190278077,
+      "brier": 0.21730488357502853,
+      "f1_at_train_threshold": 0.7925233644859813,
+      "recall_at_top_decile": 0.14228456913827656
+    },
+    "E_Hybrid_B_PerFase02": {
+      "n": 765,
+      "prevalence": 0.6522875816993464,
+      "roc_auc": 0.7555599921647808,
+      "pr_auc": 0.854262616595041,
+      "brier": 0.20911056533606487,
+      "f1_at_train_threshold": 0.7817531305903399,
+      "recall_at_top_decile": 0.14428857715430862
+    }
+  },
+  "spearman_diversity": {
+    "B_C": 0.8256496506024846,
+    "B_D": 0.9538207095651655,
+    "B_A": 0.8118819694739949,
+    "C_D": 0.7680016786207996
+  },
+  "perfase_meta": {
+    "per_bucket": {
+      "0_2": {
+        "n": 465,
+        "prevalence": 0.7161290322580646,
+        "roc_auc": 0.7924060424060424,
+        "pr_auc": 0.9006833761497315,
+        "brier": 0.1765010620707172,
+        "f1_at_train_threshold": 0.8353413654618473,
+        "recall_at_top_decile": 0.13213213213213212,
+        "n_train": 402,
+        "n_val": 465,
+        "params": {
+          "num_leaves": 15,
+          "min_child_samples": 10,
+          "is_unbalance": true,
+          "learning_rate": 0.05
+        }
+      },
+      "3_5": {
+        "n": 300,
+        "prevalence": 0.5533333333333333,
+        "roc_auc": 0.6611221003416652,
+        "pr_auc": 0.6620085519636588,
+        "brier": 0.22862447871052316,
+        "f1_at_train_threshold": 0.7126948775055679,
+        "recall_at_top_decile": 0.10843373493975904,
+        "n_train": 198,
+        "n_val": 300,
+        "params": {
+          "num_leaves": 15,
+          "min_child_samples": 5,
+          "is_unbalance": true,
+          "learning_rate": 0.05
+        }
+      }
+    },
+    "model_paths": {
+      "0_2": "/Users/bussola/Workspace/FIAP/datathon-passos-magicos/models/iter4/lgbm_fase_0_2.pkl",
+      "3_5": "/Users/bussola/Workspace/FIAP/datathon-passos-magicos/models/iter4/lgbm_fase_3_5.pkl"
+    },
+    "bucket_assignment": {
+      "0_2": "0_2",
+      "3_5": "3_5",
+      "6_9": "3_5"
+    }
+  },
+  "alt_targets": {
+    "risk_inde_drop": {
+      "n": 765,
+      "prevalence": 0.3215686274509804,
+      "roc_auc": 0.7105871203220704,
+      "pr_auc": 0.5490973137702706,
+      "brier": 0.19962283550636592,
+      "f1_at_train_threshold": 0.525,
+      "recall_at_top_decile": 0.21138211382113822
+    },
+    "risk_pedra_drop": {
+      "n": 765,
+      "prevalence": 0.2549019607843137,
+      "roc_auc": 0.5070760233918129,
+      "pr_auc": 0.2503497029700663,
+      "brier": 0.19011771091376883,
+      "f1_at_train_threshold": 0.0,
+      "recall_at_top_decile": 0.09743589743589744
+    },
+    "risk_defasagem_worsen": {
+      "n": 765,
+      "prevalence": 0.4287581699346405,
+      "roc_auc": 0.846224953954345,
+      "pr_auc": 0.8171914730392951,
+      "brier": 0.16350191523839305,
+      "f1_at_train_threshold": 0.7390728476821192,
+      "recall_at_top_decile": 0.2225609756097561
+    }
+  },
+  "best_composite": {
+    "name": "B_LGBM_interactions",
+    "roc_auc": 0.7729255503488179
+  },
+  "iter3_to_iter4_delta_roc_auc": 0.014525550348817973,
+  "feature_count_after_enrichment": 136
+}

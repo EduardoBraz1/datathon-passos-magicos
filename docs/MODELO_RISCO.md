@@ -152,16 +152,19 @@ hold-out — a F1 reportada não está inflada artificialmente.
 | Stacking (4 modelos, OOF)     | 0,739 | 0,841 | 0,202 | 0,802 | 0,140 |
 | Média(LGBM_cal, MLP_cal)      | 0,735 | 0,836 | 0,193 | 0,791 | 0,136 |
 
-**Finalista no hold-out:** `LightGBM_raw` — ROC-AUC = **0,758**, PR-AUC =
-**0,843**, Brier = **0,200**. É o modelo que escreve `prob_final` no CSV
-de predições para 2025. Calibração foi avaliada (sigmoid escolhido sobre
-isotônica por audit) mas degrada AUC neste tamanho de amostra, portanto
-mantemos a versão raw para *ranqueamento* e disponibilizamos `prob_lgbm`
-(calibrada) ao lado quando a NGO precisar de probabilidade absoluta.
+**Finalista no hold-out (Iter4):** `Iter4-B` = LightGBM_raw seed-bag×3 sobre
+o painel enriquecido com Pedra-history (Iter 3) + interactions + razões +
+quadráticas/log1p dos top-SHAP + `<ind>_minus_fase_mean` (lookup fit só no
+train). **ROC-AUC = 0,773, PR-AUC = 0,849, Brier = 0,197**. É o modelo que
+escreve `prob_final` no CSV de predições para 2025. Para detalhes da
+melhoria veja a seção **8c (Iteração 4)**.
 
 ### Bateu a barra de 0,78?
 
-**Não.** Margem: **−0,022 ROC-AUC** (0,758 vs 0,780).
+**Quase.** No alvo composto a margem ficou em **−0,007 ROC-AUC**
+(0,773 vs 0,780). Para o alvo `risk_defasagem_worsen` (definição mais
+limpa, ver seção 8c), o mesmo pipeline atinge **ROC-AUC 0,846** — **bate
+0,80 com folga**.
 
 > Por quê? O CV-AUC no próprio treino (`GroupKFold(5)` em 2022) já está em
 > **0,755** no melhor caso — i.e. *a barra de 0,78 não existe no sinal
@@ -368,6 +371,100 @@ mais robustas ao drift.
 
 ---
 
+## 8c. Iteração 4 — interactions + per-Fase + DART/GOSS + alvos alternativos
+
+### Hipóteses testadas
+1. **Interactions 2ª ordem + `<ind>_minus_fase_mean`** (médias só do train) podem
+   destravar não-linearidades que o GBM raso já estava aproximando com várias
+   árvores.
+2. **DART e GOSS** podem reduzir variância vs. GBDT padrão.
+3. **Modelos por bucket de Fase** ({0-2}, {3-5}, {6-9}) podem capturar regimes
+   distintos de risco (criança / adolescente / médio).
+4. **Stacking honesto** apenas se as predições tiverem Spearman <0,93.
+5. **Redefinir o alvo (transparente)**: `risk_defasagem_worsen`, `risk_inde_drop`,
+   `risk_pedra_drop` separados — para a NGO escolher operacionalmente.
+
+### Tabela ANTES vs DEPOIS (alvo composto, hold-out 2023→2024)
+
+| Cenário | ROC-AUC | PR-AUC | Brier | F1@0,29 | Recall@10 % |
+|---|---|---|---|---|---|
+| **Iter3** `LightGBM_raw`              | 0,758 | 0,843 | 0,200 | 0,791 | 0,142 |
+| Iter4-B `LGBM + interactions + faseμ` | **0,773** | **0,849** | **0,197** | 0,791 | 0,142 |
+| Iter4-C `LightGBM DART`               | 0,713 | 0,803 | 0,214 | 0,782 | 0,134 |
+| Iter4-D `LightGBM GOSS`               | 0,755 | 0,849 | 0,198 | 0,789 | 0,146 |
+| Iter4-A `Per-Fase (0-2, 3-9)`         | 0,738 | 0,830 | 0,197 | 0,789 | 0,136 |
+| Iter4-E `RankAvg(B, PerFase)`         | 0,766 | 0,852 | —     | —     | —     |
+| Iter4-E `Hybrid B + PerFase[0-2]`     | 0,756 | 0,854 | —     | —     | —     |
+
+**Vencedor**: Iter4-B (LGBM + interactions + fase-mean lookup) com **ROC-AUC = 0,773**,
+**+0,015** vs Iter3. PR-AUC sobe de 0,843 → 0,849 (+0,006). Brier melhora 0,200 → 0,197.
+
+### Detalhes do Iter4-A (Per-Fase)
+
+| Bucket | n_train | n_val | ROC-AUC | PR-AUC | Decisão |
+|---|---|---|---|---|---|
+| 0-2 (Fund I)        | 402 | 465 | **0,792** | **0,901** | Bom — Fund I é mais previsível |
+| 3-5 (Fund II+EM)    | 175 | 300 | 0,661 | 0,662 | Fraco — heterogeneidade da população |
+| 6-9 (EM avançado)   |  23 |  ?  |  —    |  —    | Fundido em 3-5 (n_train < 50) |
+
+O modelo único B captura a maior parte do sinal sem fragmentar a amostra. O
+hybrid (PerFase só nos buckets onde ele ganha) não bateu o B isolado porque
+as escalas das probabilidades dos sub-modelos não são comparáveis no AUC
+global; mesmo após rank-blend, o ganho marginal em 0-2 não compensa.
+
+### Bateu 0,80 / 0,85 / 0,87 / 0,90?
+
+**No alvo composto: NÃO.** Iter4-B = 0,773 — margem de **−0,027** vs 0,80.
+
+**Modelos alternativos por definição de risco** (mesmo pipeline Iter4-B):
+
+| Alvo                          | Prevalência | ROC-AUC | PR-AUC | Brier | F1@0,29 | Recall@10 % |
+|---|---|---|---|---|---|---|
+| `risk_composite`              | 65,2 %      | 0,773   | 0,849  | 0,197 | 0,791   | 0,142 |
+| `risk_inde_drop`              | 32,2 %      | 0,711   | 0,549  | 0,200 | 0,525   | 0,211 |
+| `risk_pedra_drop`             | 25,5 %      | 0,507   | 0,250  | 0,190 | 0,000   | 0,097 |
+| **`risk_defasagem_worsen`**   | 42,9 %      | **0,846** | **0,817** | **0,164** | **0,739** | **0,223** |
+
+> `risk_defasagem_worsen` **bate 0,80 com folga (margem +0,046) e quase
+> bate 0,85** (faltam apenas 0,004 ROC). 0,87 e 0,90 **não foram atingidos**
+> em nenhum alvo.
+
+Importante: este número subiu porque a **definição mudou**, não por mágica
+de modelagem — é um alvo mais "limpo" (sem união de regras), com prevalência
+moderada (43 %) e fortemente correlacionado com `Defasagem_t`, que é o
+preditor #1 do SHAP. Por isso, o ganho de AUC reflete um problema
+inerentemente mais fácil.
+
+### Recomendação operacional honesta
+
+- **Para ranquear quem está em risco de atraso escolar real** (operacional
+  para o setor pedagógico): usar `risk_defasagem_worsen`. AUC 0,846, PR-AUC
+  0,817. Threshold = 0,29 dá F1 0,739. **Top-10 % captura 22,3 % dos
+  positivos**. Modelo salvo em `models/iter4/lgbm_risk_defasagem_worsen.pkl`;
+  predições já no arquivo `data/processed/predicoes_risco_2025_alternativo.csv`.
+- **Para ranking holístico (qualquer deterioração)**: manter
+  `risk_composite` com Iter4-B (ROC 0,773). É a probabilidade que segue em
+  `prob_final` do CSV principal.
+- **Não usar `risk_pedra_drop`** isoladamente — AUC 0,51 (random).
+  Mudanças de pedra são erráticas no curto prazo.
+
+### O que tentei e NÃO ajudou (registrado)
+
+- **LightGBM DART**: ROC 0,713 (−0,06 vs B). DART sem early-stopping e em
+  dataset pequeno descartou demais.
+- **LightGBM GOSS**: ROC 0,755 (−0,02 vs B). Sem `bagging`, comprimiu
+  diversidade.
+- **Per-Fase global**: ROC 0,738 (−0,04 vs B). Quebrar a amostra em 600/3
+  matou o sinal de Fund II+EM.
+- **RankAvg(B, Per-Fase)**: ROC 0,766 (−0,01 vs B). Diversidade real
+  (Spearman 0,81) mas o per-Fase puxou o ranking para o regime fraco.
+- **Hybrid bucket-aware (B para 3-9, blend para 0-2)**: ROC 0,756.
+  Mesma justificativa.
+- **`risk_pedra_drop`**: ROC 0,51 — pedras mudam por motivos pouco
+  preditíveis com nosso painel.
+
+---
+
 ## 9. Por que não bateu 0,78? Hipótese honesta
 
 1. **Tamanho do treino**: 600 linhas é pequeno e a `GroupKFold` CV já mostra
@@ -407,11 +504,18 @@ mais robustas ao drift.
 ## 10. Como reproduzir
 
 ```bash
+# Iter 1-3 — pipeline principal (LogReg + LGBM seed-bag + XGB + MLP + Stacking)
 .venv/bin/python scripts/run_pipeline.py
-# (opcional, ~50 s) busca Bayesiana TPE — escreve experiments/<ts>/ e injeta
-# prob_experimental no CSV de predições:
+# Iter 3 (opcional, ~50 s) — busca Bayesiana TPE; injeta prob_experimental
 .venv/bin/python scripts/run_optuna_lgbm.py
+# Iter 4 — interactions + DART/GOSS + per-Fase + alvos alternativos
+.venv/bin/python scripts/run_iter4.py
 ```
+
+Resultado final do composto (`prob_final` no CSV principal) reflete o modelo
+da **Iteração 4** (LGBM + interactions + fase-mean lookup): ROC-AUC = 0,773.
+Para o alvo `risk_defasagem_worsen` (recomendação operacional alternativa),
+veja `data/processed/predicoes_risco_2025_alternativo.csv` (ROC-AUC = 0,846).
 
 Tempo total observado: **~30 s** (CPU). Saídas geradas:
 
