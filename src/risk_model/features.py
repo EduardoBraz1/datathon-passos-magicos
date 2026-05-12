@@ -189,6 +189,75 @@ def _years_in_program(panel: pd.DataFrame, year_t: int) -> pd.Series:
     return counts
 
 
+_PEDRA_HISTORY_BASE_YEAR = 2020
+
+
+def _pedra_history_features(panel: pd.DataFrame, year_t: int) -> pd.DataFrame:
+    """Convert the wide Pedra 20/21/22/23 columns merged from the xlsx into:
+
+    * ``pedra_lag<k>_ord``: ordinal Pedra k years before the anchor (k=1..3),
+      taken from the appropriate Pedra YY column in the source xlsx.
+    * ``pedra_history_depth``: number of past years with a non-null Pedra
+      record (proxy for tenure).
+    * ``pedra_slope``: simple slope across observed past years (positive ⇒
+      ascending trajectory).
+    """
+    curr = panel.query("Ano == @year_t").set_index("RA").copy()
+    out = pd.DataFrame(index=curr.index)
+    order_map = {"Quartzo": 0, "Agata": 1, "Ametista": 2, "Topázio": 3}
+
+    # Map the requested lag to the actual column name in the merged panel.
+    history_cols = []
+    for k in (1, 2, 3, 4):
+        yy = year_t - k
+        col = f"Pedra_{yy % 100:02d}"
+        if col in curr.columns:
+            history_cols.append((k, col))
+
+    for k, col in history_cols:
+        ord_series = curr[col].map(order_map).astype("Float32")
+        out[f"pedra_lag{k}_ord"] = ord_series
+
+    if history_cols:
+        # Depth of available Pedra history.
+        depth_cols = [out[f"pedra_lag{k}_ord"].notna() for k, _ in history_cols]
+        out["pedra_history_depth"] = pd.concat(depth_cols, axis=1).sum(axis=1).astype("int8")
+
+        # Slope of pedra over time (using available lags).
+        slopes = []
+        for ra in out.index:
+            xs, ys = [], []
+            for k, _ in history_cols:
+                v = out.at[ra, f"pedra_lag{k}_ord"]
+                if pd.notna(v):
+                    xs.append(-k)  # x is time relative to anchor (earlier=more negative)
+                    ys.append(float(v))
+            curr_ord = panel.query("Ano == @year_t").set_index("RA").loc[ra, "Pedra_ord"]
+            if pd.notna(curr_ord):
+                xs.append(0)
+                ys.append(float(curr_ord))
+            if len(xs) >= 2:
+                x = np.asarray(xs, dtype=float)
+                y = np.asarray(ys, dtype=float)
+                x_c = x - x.mean()
+                d = (x_c ** 2).sum()
+                slope = 0.0 if d == 0 else float((x_c * (y - y.mean())).sum() / d)
+            else:
+                slope = 0.0
+            slopes.append(slope)
+        out["pedra_slope"] = slopes
+        # Delta vs current
+        if "Pedra_ord" in panel.columns:
+            curr_ord = panel.query("Ano == @year_t").set_index("RA")["Pedra_ord"].astype("float64")
+            for k, _ in history_cols:
+                out[f"pedra_delta_{k}"] = (curr_ord - out[f"pedra_lag{k}_ord"].astype("float64"))
+    else:
+        out["pedra_history_depth"] = 0
+        out["pedra_slope"] = 0.0
+
+    return out
+
+
 def _is_new_student(panel: pd.DataFrame, year_t: int) -> pd.Series:
     """1 if this is the first year of the student in the program."""
     curr = panel.query("Ano == @year_t").set_index("RA").index
@@ -224,9 +293,16 @@ def build_year_features(panel: pd.DataFrame, year_t: int) -> pd.DataFrame:
     yip = _years_in_program(panel, year_t).reindex(curr.index)
     new_flag = _is_new_student(panel, year_t).reindex(curr.index)
 
+    # Pedra history (only present if the panel was enriched with the xlsx).
+    if any(c.startswith("Pedra_2") for c in panel.columns):
+        pedra_hist = _pedra_history_features(panel, year_t)
+    else:
+        pedra_hist = pd.DataFrame(index=curr.index)
+
     feats = pd.concat(
         [
             base, deltas, rolling, interactions, cohort, slopes, missing,
+            pedra_hist,
             yip.rename("years_in_program"),
             new_flag,
         ],

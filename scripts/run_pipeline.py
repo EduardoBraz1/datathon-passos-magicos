@@ -125,6 +125,7 @@ class Datasets:
 
 def assemble() -> Datasets:
     panel = data.load_panel()
+    panel = data.enrich_with_pedra_history(panel)
     feature_panel, schema = features.build_feature_panel(panel, config.YEARS_AVAILABLE)
 
     cat_cols = ["Gênero", "Instituição de ensino"]
@@ -824,6 +825,24 @@ def main() -> int:
         "f1_at_train_threshold": 0.0,
         "recall_at_top_decile": 0.1,
     }
+    # Record any external experiment artifacts (e.g. Optuna search) so the
+    # historical comparison stays in one place.  We do not re-run them here.
+    exp_dir = config.ROOT / "experiments"
+    experiments = []
+    if exp_dir.exists():
+        for ts_dir in sorted(exp_dir.iterdir()):
+            for sub in sorted(ts_dir.iterdir()):
+                best_json = sub / "best.json"
+                if best_json.exists():
+                    try:
+                        experiments.append({
+                            "experiment": sub.name,
+                            "timestamp": ts_dir.name,
+                            **json.loads(best_json.read_text()),
+                        })
+                    except Exception:
+                        pass
+    metrics_full["experiments"] = experiments
     metrics_full["_meta"] = {
         "n_train": int(len(ds.X_train)),
         "n_val": int(len(ds.X_val)),
@@ -922,10 +941,16 @@ def main() -> int:
         np.column_stack([lgbm_pred_raw, xgb_pred_raw, mlp_pred_raw, logreg_pred])
     )[:, 1]
 
-    # Decide which model is "final" using hold-out ROC-AUC
-    candidates = ["LightGBM_calibr", "XGBoost_calibr", "MLP_raw", "Stacking", "Average_LGBM_MLP"]
+    # Decide which model is "final" using hold-out ROC-AUC.  We include the
+    # raw LightGBM here because its calibrated version sacrificed ranking
+    # quality on this dataset (isotonic + sigmoid both flattened AUC).
+    candidates = [
+        "LightGBM_raw", "LightGBM_calibr", "XGBoost_calibr",
+        "MLP_raw", "Stacking", "Average_LGBM_MLP",
+    ]
     finalist = max(candidates, key=lambda n: metrics_full[n]["roc_auc"])
     finalist_pred = {
+        "LightGBM_raw": lgbm_pred_raw,
         "LightGBM_calibr": lgbm_pred_cal,
         "XGBoost_calibr": xgb_pred_cal,
         "MLP_raw": mlp_pred_raw,

@@ -1,0 +1,25 @@
+{
+  "timestamp": "20260512T120515",
+  "n_trials": 50,
+  "search_seconds": 32.03194713592529,
+  "best_cv_auc": 0.7656942616835796,
+  "best_params": {
+    "num_leaves": 26,
+    "min_child_samples": 44,
+    "feature_fraction": 0.8042157732610001,
+    "bagging_fraction": 0.6794564444822642,
+    "bagging_freq": 1,
+    "lambda_l1": 0.053684117671480645,
+    "lambda_l2": 0.10243816108192864,
+    "learning_rate": 0.014335000603436957,
+    "min_split_gain": 0.3846676281664705
+  },
+  "avg_best_iteration": 267,
+  "holdout": {
+    "roc_auc": 0.7474535537239894,
+    "pr_auc": 0.8377085291129645,
+    "brier": 0.20157000328198663,
+    "f1_at_0.29": 0.798990748528175,
+    "recall_top10pct": 0.13827655310621242
+  }
+}

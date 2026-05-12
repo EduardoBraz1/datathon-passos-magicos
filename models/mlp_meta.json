@@ -1,7 +1,7 @@
 {
-  "n_features": 108,
-  "history_len": 35,
-  "operational_threshold": 0.35999999999999993,
+  "n_features": 114,
+  "history_len": 59,
+  "operational_threshold": 0.29,
   "architecture": "Linear(n\u2192256)\u2192BN\u2192GELU\u2192Drop(0.3)\u2192Linear(\u2192128)\u2192BN\u2192GELU\u2192Drop(0.3)\u2192Linear(\u219264)\u2192GELU\u2192Drop(0.2)\u2192Linear(\u21921)",
   "device": "cpu",
   "optimizer": "AdamW(lr=1e-3, wd=1e-4)",

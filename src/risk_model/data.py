@@ -139,3 +139,45 @@ def clean(df: pd.DataFrame) -> pd.DataFrame:
 def load_panel(path: Optional[Path] = None) -> pd.DataFrame:
     """Convenience: load + clean in one call."""
     return clean(load_raw(path))
+
+
+def enrich_with_pedra_history(panel: pd.DataFrame,
+                              xlsx_path: Optional[Path] = None) -> pd.DataFrame:
+    """Merge Pedra 20/21/22/23 historical columns from the raw xlsx.
+
+    Why these columns? They are state at year YY (≤ current anchor year *t*),
+    so they are legitimate features at time *t* — no t+1 leakage. The processed
+    CSV only kept the current-year Pedra; this enrichment recovers up to four
+    years of trajectory per student.
+
+    Other "extra" columns in PEDE2022 (Indicado, Atingiu PV, Destaque flags,
+    Rec Psicologia, Cg/Cf/Ct) are 100% NaN in PEDE2023 and PEDE2024 so they
+    cannot be used as features under our temporal split (the model would see
+    them in training but never in val/predict).
+    """
+    xlsx_path = xlsx_path or config.DATA_RAW / "BASE DE DADOS PEDE 2024 - DATATHON.xlsx"
+    xlsx_path = Path(xlsx_path)
+    if not xlsx_path.exists():
+        log.warning("Pedra-history enrichment skipped — xlsx not found at %s", xlsx_path)
+        return panel
+
+    xls = pd.ExcelFile(xlsx_path)
+    extra_rows = []
+    for sheet, ano in (("PEDE2022", 2022), ("PEDE2023", 2023), ("PEDE2024", 2024)):
+        df = pd.read_excel(xls, sheet_name=sheet)
+        cols = [c for c in ["Pedra 20", "Pedra 21", "Pedra 22", "Pedra 23"] if c in df.columns]
+        sub = df[["RA"] + cols].copy()
+        sub["Ano"] = ano
+        sub = sub.rename(columns={c: c.replace(" ", "_") for c in cols})
+        extra_rows.append(sub)
+    extra = pd.concat(extra_rows, ignore_index=True)
+
+    # Normalise spelling (same rule as Pedra column)
+    pedra_cols = [c for c in extra.columns if c.startswith("Pedra_")]
+    for c in pedra_cols:
+        extra[c] = extra[c].replace({"Ágata": "Agata"})
+    extra["Ano"] = extra["Ano"].astype("Int16")
+
+    enriched = panel.merge(extra, on=["RA", "Ano"], how="left", validate="one_to_one")
+    log.info("Enriched panel with %d Pedra-history columns from xlsx.", len(pedra_cols))
+    return enriched

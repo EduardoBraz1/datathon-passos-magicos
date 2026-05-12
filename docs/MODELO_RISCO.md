@@ -139,27 +139,29 @@ hold-out — a F1 reportada não está inflada artificialmente.
 
 ## 4. Resultados do hold-out (2023 → 2024) — alvo composto
 
-| Modelo | ROC-AUC | PR-AUC | Brier | F1 @ thr=0,36 | Recall@top-10 % |
+| Modelo | ROC-AUC | PR-AUC | Brier | F1 @ thr=0,29 | Recall@top-10 % |
 |---|---|---|---|---|---|
-| Prevalência (baseline) | 0,500 | 0,652 | 0,227 | 0,000 | 0,100 |
-| LogReg | 0,703 | 0,820 | 0,207 | 0,784 | 0,146 |
-| LightGBM (raw, seed-bag×3) | **0,754** | 0,833 | 0,200 | 0,805 | 0,136 |
-| LightGBM (calibr. sigmoid) | 0,742 | 0,830 | 0,191 | 0,799 | 0,138 |
-| XGBoost (raw) | 0,695 | 0,809 | 0,215 | 0,776 | 0,136 |
-| XGBoost (calibr. isotonic) | 0,703 | 0,816 | 0,203 | 0,787 | 0,140 |
-| MLP (raw) | 0,720 | 0,821 | 0,246 | 0,734 | 0,134 |
-| MLP (calibr. Platt) | 0,720 | 0,821 | **0,209** | 0,787 | 0,134 |
-| Stacking (4 modelos, OOF) | 0,744 | **0,841** | 0,215 | 0,769 | 0,134 |
-| **Média(LGBM_cal, MLP_cal)** | **0,749** | **0,841** | 0,195 | 0,802 | 0,134 |
+| Prevalência (baseline)        | 0,500 | 0,652 | 0,227 | 0,000 | 0,100 |
+| LogReg                        | 0,706 | 0,816 | 0,208 | 0,797 | 0,134 |
+| **LightGBM (raw, seed-bag×3)**| **0,758** | **0,843** | 0,200 | 0,791 | 0,142 |
+| LightGBM (calibr. sigmoid)    | 0,738 | 0,833 | **0,193** | 0,791 | 0,140 |
+| XGBoost (raw)                 | 0,718 | 0,826 | 0,209 | 0,794 | 0,142 |
+| XGBoost (calibr. sigmoid)     | 0,715 | 0,827 | 0,201 | 0,792 | 0,142 |
+| MLP (raw)                     | 0,682 | 0,783 | 0,231 | 0,774 | 0,124 |
+| MLP (calibr. Platt)           | 0,682 | 0,783 | 0,208 | 0,792 | 0,124 |
+| Stacking (4 modelos, OOF)     | 0,739 | 0,841 | 0,202 | 0,802 | 0,140 |
+| Média(LGBM_cal, MLP_cal)      | 0,735 | 0,836 | 0,193 | 0,791 | 0,136 |
 
-**Finalista no hold-out:** `Average_LGBM_MLP` — ROC-AUC = **0,749**, PR-AUC = **0,841**, Brier = **0,195**.
-(Em ROC-AUC bruta o LightGBM raw é marginalmente melhor — 0,754 — porém o
-ensemble fornece melhor PR-AUC e melhor calibração; ambos servem como "modelo
-de produção" defensável.)
+**Finalista no hold-out:** `LightGBM_raw` — ROC-AUC = **0,758**, PR-AUC =
+**0,843**, Brier = **0,200**. É o modelo que escreve `prob_final` no CSV
+de predições para 2025. Calibração foi avaliada (sigmoid escolhido sobre
+isotônica por audit) mas degrada AUC neste tamanho de amostra, portanto
+mantemos a versão raw para *ranqueamento* e disponibilizamos `prob_lgbm`
+(calibrada) ao lado quando a NGO precisar de probabilidade absoluta.
 
 ### Bateu a barra de 0,78?
 
-**Não.** Margem: **−0,026 ROC-AUC** (0,754 vs 0,780).
+**Não.** Margem: **−0,022 ROC-AUC** (0,758 vs 0,780).
 
 > Por quê? O CV-AUC no próprio treino (`GroupKFold(5)` em 2022) já está em
 > **0,755** no melhor caso — i.e. *a barra de 0,78 não existe no sinal
@@ -293,6 +295,79 @@ operacionais (ex.: IPV baixo + Defasagem crescente).
 
 ---
 
+## 8b. Iteração 3 — enriquecimento do painel + busca Bayesiana
+
+### Hipótese
+O CSV processado em `data/processed/base_historico.csv` perdeu colunas que
+existem no Excel original. Em particular, **Pedra 20 / 21 / 22 / 23** são
+estado em anos passados (estritamente ≤ *t*) → podem ser features legítimas.
+Uma trajetória de Pedra de até 4 anos poderia adicionar sinal além das
+janelas curtas `prev_*` / `roll2_*` que só vão para *t − 1*.
+
+Adicionalmente, a busca em grade de hiperparâmetros já estava saturada
+(9 combinações × LGBM, 9 × XGB, todas dentro de 0,005 de AUC). Uma busca
+**Bayesiana TPE** com 50 trials sobre o mesmo train (GroupKFold-5 por RA)
+poderia encontrar configurações mais finas no espaço contínuo
+(`learning_rate`, `feature_fraction`, `bagging_fraction`, `lambda_l1`,
+`lambda_l2`, `min_split_gain`).
+
+### O que foi feito
+1. **Enriquecimento**: `data.enrich_with_pedra_history()` lê o xlsx,
+   normaliza ortografia (Ágata→Agata) e faz merge `(RA, Ano)`. Em seguida,
+   `features._pedra_history_features` produz `pedra_lag1_ord`,
+   `pedra_lag2_ord`, `pedra_history_depth`, `pedra_slope`, `pedra_delta_1`,
+   `pedra_delta_2` (lags 3-4 ficam ≥83 % NaN no train e são descartados pelo
+   filtro "100 % NaN no treino"). Outras "extras" do xlsx (Indicado,
+   Atingiu PV, Destaque IEG/IDA/IPV, Rec Psicologia, Cg/Cf/Ct) foram
+   **descartadas** porque só existem no PEDE2022 — usá-las criaria
+   inconsistência (modelo veria valores no treino e só NaN no val/predict).
+2. **Optuna TPE** com 50 trials (`scripts/run_optuna_lgbm.py`), métrica =
+   mean CV ROC-AUC com GroupKFold-5; busca em:
+   `num_leaves∈[7,63]`, `min_child_samples∈[5,60]`,
+   `feature_fraction∈[0.5,1]`, `bagging_fraction∈[0.5,1]`,
+   `bagging_freq∈{0,1,3,5}`, `lambda_l1, lambda_l2 ∈ [10⁻³, 5]` log,
+   `learning_rate ∈ [0.01, 0.1]` log, `min_split_gain ∈ [0, 0.5]`.
+   O hold-out é tocado **uma única vez** ao final com os `best_params`.
+
+### Resultados (ANTES = checkpoint `7a3f0ec`, DEPOIS = run atual)
+
+| Modelo | ROC-AUC ANTES | ROC-AUC DEPOIS | Δ | PR-AUC ANTES | PR-AUC DEPOIS |
+|---|---|---|---|---|---|
+| LightGBM_raw          | 0,754 | **0,758** | +0,004 | 0,833 | 0,843 (+0,010) |
+| LightGBM_calibr       | 0,742 | 0,738 | −0,004 | 0,830 | 0,833 |
+| XGBoost_raw           | 0,695 | 0,718 | +0,023 | 0,809 | 0,826 (+0,017) |
+| Stacking (4 modelos)  | 0,744 | 0,739 | −0,005 | 0,841 | 0,841 |
+| Average_LGBM_MLP      | 0,749 | 0,735 | −0,014 | 0,841 | 0,836 |
+| LightGBM **Optuna**   | —     | 0,747 | −0,011¹ | —     | 0,838 |
+
+¹ Optuna alcançou **CV-AUC 0,7657** (vs 0,7521 da grade), mas a melhoria não
+se traduziu no hold-out (caiu para 0,747). É um caso clássico de
+**overfitting ao train**: TPE encontrou parâmetros que exploram melhor a
+estrutura do treino 2022→2023 mas generalizam pior para 2023→2024.
+
+### Decisão
+- **Enriquecimento Pedra-history: ADOTADO.** Ganho honesto em LGBM_raw
+  (+0,004 ROC, +0,010 PR-AUC) e XGB_raw (+0,023 ROC, +0,017 PR-AUC).
+  Tecnicamente sólido e baixo risco — colunas estado-em-passado, sem
+  vazamento.
+- **Optuna 50-trials: REJEITADO.** CV-AUC subiu mas hold-out caiu
+  −0,011 vs LGBM_raw da grade. **Não bateu o limiar +0,005** definido
+  como critério de adoção. Os parâmetros, score e CSV de trials estão
+  preservados em `experiments/<timestamp>/optuna_lgbm/` para auditoria.
+- **`prob_final` no CSV de 2025 = LightGBM_raw (com Pedra-history).**
+  Adicionei coluna `prob_experimental` com a predição do LightGBM-Optuna
+  para o usuário comparar manualmente.
+
+### Por que CV ↑ mas hold-out ↓?
+Hipótese mais provável: a busca Bayesiana, com `learning_rate=0.014` e
+`num_leaves=26`, gera árvores mais profundas e treina por ~267 iterações
+(vs ~30-50 da grade). Isso ajusta padrões da transição 2022→2023 que **não
+repetem** em 2023→2024 — confirma o `drift de transição` discutido na
+seção 9. A grade favoreceu árvores rasas (15 folhas, ~30 iter) que são
+mais robustas ao drift.
+
+---
+
 ## 9. Por que não bateu 0,78? Hipótese honesta
 
 1. **Tamanho do treino**: 600 linhas é pequeno e a `GroupKFold` CV já mostra
@@ -316,9 +391,12 @@ operacionais (ex.: IPV baixo + Defasagem crescente).
 2. **Reabrir a discussão de alvo** com o stakeholder: `risk_inde_drop` puro
    tem 32 % de prevalência — mais fácil de ranquear e operacionalmente
    talvez mais útil para o setor pedagógico.
-3. **Mais features históricas** já no Excel raw (Pedra 20/21/22/23,
-   recomendações dos avaliadores, IPP histórico) — a coluna `Pedra 20/21`
-   antecede o painel atual e foi descartada na preparação do CSV.
+3. **Mais features históricas** ~~já no Excel raw (Pedra 20/21/22/23)~~ —
+   **feito na Iteração 3** (seção 8b). Outras colunas exclusivas do
+   PEDE2022 (Indicado, Atingiu PV, Cg/Cf/Ct, Destaque, Rec Psicologia) **não
+   são utilizáveis** porque estão 100 % NaN em 2023 e 2024 — usá-las criaria
+   uma feature observada só no treino. *Próximo passo viável aqui*: pedir à
+   NGO o repasse do PEDE2023/2024 com essas mesmas colunas preenchidas.
 4. **Aumentar amostra**: incluir alunos que entraram a meio do ano (hoje
    filtrados pelo *inner join* RA-pares), com `is_new_student` como flag.
 5. **Avaliar com janela temporal expandida** quando os dados 2025 chegarem
@@ -330,6 +408,9 @@ operacionais (ex.: IPV baixo + Defasagem crescente).
 
 ```bash
 .venv/bin/python scripts/run_pipeline.py
+# (opcional, ~50 s) busca Bayesiana TPE — escreve experiments/<ts>/ e injeta
+# prob_experimental no CSV de predições:
+.venv/bin/python scripts/run_optuna_lgbm.py
 ```
 
 Tempo total observado: **~30 s** (CPU). Saídas geradas:
