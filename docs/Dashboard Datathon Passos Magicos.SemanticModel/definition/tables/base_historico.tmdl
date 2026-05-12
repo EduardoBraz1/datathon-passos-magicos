@@ -1,0 +1,263 @@
+table base_historico
+	lineageTag: d22fe4bd-5556-4288-848f-4420b5761671
+
+	column RA
+		dataType: string
+		lineageTag: 6ad26a01-ab74-4f07-9db7-162ca0aa2d33
+		summarizeBy: none
+		sourceColumn: RA
+
+		annotation SummarizationSetBy = Automatic
+
+	column Fase
+		dataType: int64
+		formatString: 0
+		lineageTag: 9c4b84d4-06ed-4289-bbdc-9027f3cacd05
+		summarizeBy: sum
+		sourceColumn: Fase
+
+		annotation SummarizationSetBy = Automatic
+
+	column Turma
+		dataType: string
+		lineageTag: d28377a0-7a0a-4824-bb87-5daf386721d5
+		summarizeBy: none
+		sourceColumn: Turma
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nome Anonimizado'
+		dataType: string
+		lineageTag: 807ce4e1-f0e4-4f5a-9491-f9028a7a30b2
+		summarizeBy: none
+		sourceColumn: Nome Anonimizado
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ano nasc'
+		dataType: int64
+		formatString: 0
+		lineageTag: c0cd09bb-a30b-47d0-bd75-fe3e92c21a86
+		summarizeBy: sum
+		sourceColumn: Ano nasc
+
+		annotation SummarizationSetBy = Automatic
+
+	column Idade
+		dataType: int64
+		formatString: 0
+		lineageTag: 196901bd-c1d1-4318-b6bd-ffb92697a37e
+		summarizeBy: sum
+		sourceColumn: Idade
+
+		annotation SummarizationSetBy = Automatic
+
+	column Gênero
+		dataType: string
+		lineageTag: f12ef641-f789-4314-95e5-bc9dd1a2cf3a
+		summarizeBy: none
+		sourceColumn: Gênero
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ano ingresso'
+		dataType: int64
+		formatString: 0
+		lineageTag: 68a6e4c0-b6d4-4c93-857f-f167b55cf8e0
+		summarizeBy: sum
+		sourceColumn: Ano ingresso
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Instituição de ensino'
+		dataType: string
+		lineageTag: 880dbbf8-29d2-4966-becf-058e6b843e6a
+		summarizeBy: none
+		sourceColumn: Instituição de ensino
+
+		annotation SummarizationSetBy = Automatic
+
+	column Pedra
+		dataType: string
+		lineageTag: bccbaf47-4c0b-4096-b56a-ba1efa1b2b5b
+		summarizeBy: none
+		sourceColumn: Pedra
+
+		annotation SummarizationSetBy = Automatic
+
+	column INDE
+		dataType: int64
+		formatString: 0
+		lineageTag: dd72a988-ebdd-4a1f-84e8-b40f46f58f0f
+		summarizeBy: sum
+		sourceColumn: INDE
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nº Av'
+		dataType: int64
+		formatString: 0
+		lineageTag: 92a2d3a2-9fd1-4952-9fa7-8ad626149bee
+		summarizeBy: sum
+		sourceColumn: Nº Av
+
+		annotation SummarizationSetBy = Automatic
+
+	column IAA
+		dataType: double
+		formatString: 0
+		lineageTag: 7513966e-e232-415d-a088-aded9892a4e3
+		summarizeBy: sum
+		sourceColumn: IAA
+
+		annotation SummarizationSetBy = Automatic
+
+	column IEG
+		dataType: double
+		formatString: 0
+		lineageTag: f744d0bc-121f-4823-8f33-e4cb95f531f8
+		summarizeBy: sum
+		sourceColumn: IEG
+
+		annotation SummarizationSetBy = Automatic
+
+	column IPS
+		dataType: double
+		formatString: 0
+		lineageTag: d8aeaf6a-ed38-4f5f-b77f-c3c9bdc1a6c5
+		summarizeBy: sum
+		sourceColumn: IPS
+
+		annotation SummarizationSetBy = Automatic
+
+	column IDA
+		dataType: double
+		formatString: 0
+		lineageTag: 6d169082-dfd7-47ae-9094-18c9afe54930
+		summarizeBy: sum
+		sourceColumn: IDA
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mat
+		dataType: double
+		formatString: 0
+		lineageTag: ccacce80-b03c-4c15-b7bc-e18e312d61ac
+		summarizeBy: sum
+		sourceColumn: Mat
+
+		annotation SummarizationSetBy = Automatic
+
+	column Por
+		dataType: double
+		formatString: 0
+		lineageTag: edbb2e37-8f34-4e71-8b57-57001e64b4a9
+		summarizeBy: sum
+		sourceColumn: Por
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ing
+		dataType: double
+		formatString: 0
+		lineageTag: 43e13a3e-45af-4f48-90de-9d8d65d60df7
+		summarizeBy: sum
+		sourceColumn: Ing
+
+		annotation SummarizationSetBy = Automatic
+
+	column IPV
+		dataType: double
+		formatString: 0
+		lineageTag: b52ed276-0577-4e67-8479-7a0e919fce97
+		summarizeBy: sum
+		sourceColumn: IPV
+
+		annotation SummarizationSetBy = Automatic
+
+	column IAN
+		dataType: double
+		formatString: 0
+		lineageTag: 159733bd-5d16-4370-8d4e-8c794e410238
+		summarizeBy: sum
+		sourceColumn: IAN
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fase Ideal'
+		dataType: string
+		lineageTag: cf940077-52b3-43cd-a38d-3c5c280ca2f2
+		summarizeBy: none
+		sourceColumn: Fase Ideal
+
+		annotation SummarizationSetBy = Automatic
+
+	column Defasagem
+		dataType: int64
+		formatString: 0
+		lineageTag: 05baf4bb-0afe-4457-87dc-c01b3cb7ad33
+		summarizeBy: sum
+		sourceColumn: Defasagem
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ano
+		dataType: int64
+		formatString: 0
+		lineageTag: 9e55f923-e0a1-4a36-9335-7b2ee194734e
+		summarizeBy: sum
+		sourceColumn: Ano
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Data de Nasc'
+		dataType: string
+		lineageTag: 125600ef-208c-49b4-ae87-69c6f2e933e5
+		summarizeBy: none
+		sourceColumn: Data de Nasc
+
+		annotation SummarizationSetBy = Automatic
+
+	column IPP
+		dataType: double
+		lineageTag: 820aa2fa-5e1b-450a-bbdf-b9e65e63cd61
+		summarizeBy: sum
+		sourceColumn: IPP
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Escola
+		dataType: string
+		lineageTag: 447221f8-c0e5-4424-87c5-db9cf35423fd
+		summarizeBy: none
+		sourceColumn: Escola
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ativo/ Inativo'
+		dataType: string
+		lineageTag: 655bf744-6a6c-4e02-8b37-015bcdcbf2f9
+		summarizeBy: none
+		sourceColumn: Ativo/ Inativo
+
+		annotation SummarizationSetBy = Automatic
+
+	partition base_historico = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents("C:\Users\esb11\OneDrive\Área de Trabalho\Python FIAP\Fase 5 - Deep Learning\Datathon\datathon-passos-magicos\data\processed\base_historico.csv"),[Delimiter=",", Columns=28, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+				    #"Valor Substituído" = Table.ReplaceValue(#"Cabeçalhos Promovidos",".",",",Replacer.ReplaceText,{"INDE", "Nº Av", "IAA", "IEG", "IPS", "IDA", "Mat", "Por", "Ing", "IPV", "IAN"}),
+				    #"Valor Substituído1" = Table.ReplaceValue(#"Valor Substituído",".",",",Replacer.ReplaceText,{"IPP"}),
+				    #"Valor Substituído2" = Table.ReplaceValue(#"Valor Substituído1",".",",",Replacer.ReplaceText,{"Ano nasc"}),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Valor Substituído2",{{"RA", type text}, {"Fase", Int64.Type}, {"Turma", type text}, {"Nome Anonimizado", type text}, {"Ano nasc", Int64.Type}, {"Idade", Int64.Type}, {"Gênero", type text}, {"Ano ingresso", Int64.Type}, {"Instituição de ensino", type text}, {"Pedra", type text}, {"INDE", Int64.Type}, {"Nº Av", Int64.Type}, {"IAA", type number}, {"IEG", type number}, {"IPS", type number}, {"IDA", type number}, {"Mat", type number}, {"Por", type number}, {"Ing", type number}, {"IPV", type number}, {"IAN", type number}, {"Fase Ideal", type text}, {"Defasagem", Int64.Type}, {"Ano", Int64.Type}, {"Data de Nasc", type text}, {"IPP", type number}, {"Escola", type text}, {"Ativo/ Inativo", type text}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

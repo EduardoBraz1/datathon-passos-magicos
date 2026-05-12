@@ -1,0 +1,92 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/3.2.0/schema.json",
+  "themeCollection": {
+    "baseTheme": {
+      "name": "CY26SU04",
+      "reportVersionAtImport": {
+        "visual": "2.8.0",
+        "report": "3.2.0",
+        "page": "2.3.1"
+      },
+      "type": "SharedResources"
+    }
+  },
+  "objects": {
+    "section": [
+      {
+        "properties": {
+          "verticalAlignment": {
+            "expr": {
+              "Literal": {
+                "Value": "'Top'"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "outspacePane": [
+      {
+        "properties": {
+          "expanded": {
+            "expr": {
+              "Literal": {
+                "Value": "false"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "publicCustomVisuals": [
+    "PBI_CV_73744D90_4DC9_4F18_8BA5_EE8FA5C98035"
+  ],
+  "resourcePackages": [
+    {
+      "name": "SharedResources",
+      "type": "SharedResources",
+      "items": [
+        {
+          "name": "CY26SU04",
+          "path": "BaseThemes/CY26SU04.json",
+          "type": "BaseTheme"
+        }
+      ]
+    },
+    {
+      "name": "RegisteredResources",
+      "type": "RegisteredResources",
+      "items": [
+        {
+          "name": "A_F_rmula_do_Sucesso_-_IPV8159293256385413.svg",
+          "path": "A_F_rmula_do_Sucesso_-_IPV8159293256385413.svg",
+          "type": "Image"
+        },
+        {
+          "name": "Expectativa_vs_Realidade_-_Aut1676966358529599.svg",
+          "path": "Expectativa_vs_Realidade_-_Aut1676966358529599.svg",
+          "type": "Image"
+        },
+        {
+          "name": "Gargalos_e_Defasagem07795653071641562.svg",
+          "path": "Gargalos_e_Defasagem07795653071641562.svg",
+          "type": "Image"
+        },
+        {
+          "name": "Vis_o_Executiva15231338327475952.svg",
+          "path": "Vis_o_Executiva15231338327475952.svg",
+          "type": "Image"
+        }
+      ]
+    }
+  ],
+  "settings": {
+    "useStylableVisualContainerHeader": true,
+    "exportDataMode": "AllowSummarized",
+    "defaultDrillFilterOtherVisuals": true,
+    "allowChangeFilterTypes": true,
+    "useEnhancedTooltips": true,
+    "useDefaultAggregateDisplayName": true
+  }
+}

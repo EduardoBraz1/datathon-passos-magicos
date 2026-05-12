@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Dashboard Datathon Passos Magicos"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "a7db1761-f370-48bb-8473-e0676527a8a5"
+  }
+}

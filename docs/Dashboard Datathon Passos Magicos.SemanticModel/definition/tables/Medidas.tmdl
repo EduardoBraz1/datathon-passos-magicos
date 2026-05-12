@@ -1,0 +1,62 @@
+table Medidas
+	lineageTag: ef952a06-5bef-4f07-8f2d-119bbc44b257
+
+	measure 'Média INDE' = AVERAGE(base_historico[INDE])
+		formatString: 0.00
+		lineageTag: c0cdafe2-8790-4663-a164-0f0dd75219c9
+
+	measure 'Média IDA' = AVERAGE(base_historico[IDA])
+		formatString: 0.00
+		lineageTag: f8d182f1-2405-4731-a0f8-2c3e86f51f1a
+
+	measure 'Média IAA' = AVERAGE(base_historico[IAA])
+		lineageTag: d8fdefd0-9b90-4bbe-a54f-f5cac43084b5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Gap Autoavaliação' = [Média IAA] - [Média IDA]
+		lineageTag: 72ca0eb5-c4e6-47ba-804f-19bd5a54ff5d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Alunos' = COUNTROWS(base_historico)
+		formatString: #,0
+		lineageTag: a27cd3ef-e1c0-4375-9c92-3dfa0c83edbb
+
+	measure '% Alunos com Defasagem' =
+			
+			DIVIDE(
+			    CALCULATE(COUNTROWS(base_historico), base_historico[Defasagem] > 0),
+			    COUNTROWS(base_historico
+			))
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: dda3449e-c384-4b1b-bf3f-0468e4bf73ba
+
+	measure 'IDA Fase Crítica' = CALCULATE([Média IDA], base_historico[Fase] = 3)
+		lineageTag: 1fc4d4c4-57c3-46c0-82d1-7f7c73b184a3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Média IPV' = AVERAGE(base_historico[IPV])
+		lineageTag: 931689b8-f58f-4f7c-bb77-49b2d4b2d4a9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Column
+		isHidden
+		formatString: 0
+		lineageTag: a73662e7-1073-47c8-91a0-9615d73738b5
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Medidas = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = 2700032fd7404c478bea12c037e0f268
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":""}
+

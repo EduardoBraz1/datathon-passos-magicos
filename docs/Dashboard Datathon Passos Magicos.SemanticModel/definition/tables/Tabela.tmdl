@@ -1,0 +1,32 @@
+table Tabela
+	lineageTag: aefccfb4-1bcb-4ced-bd38-da219956ca19
+
+	column Indicador
+		dataType: string
+		lineageTag: 2e4876a7-a601-4719-960d-26a1c1ceb15a
+		summarizeBy: none
+		sourceColumn: Indicador
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Força no Desempenho'
+		dataType: double
+		lineageTag: e633b3c0-866a-47ce-9466-f814be182d8e
+		summarizeBy: sum
+		sourceColumn: Força no Desempenho
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Tabela = m
+		mode: import
+		source =
+				let
+				    Fonte = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45W8gwIUNJRMtAxNleK1QFxg8FcAyOl2FgA", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Indicador = _t, #"Força no Desempenho" = _t]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Fonte,{{"Indicador", type text}, {"Força no Desempenho", type number}})
+				in
+				    #"Tipo Alterado"
+
+	annotation PBI_ResultType = Table
+

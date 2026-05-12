@@ -1,0 +1,2399 @@
+cultureInfo pt-BR
+
+	linguisticMetadata =
+			{
+			  "Version": "4.1.0",
+			  "Language": "en-US",
+			  "Entities": {
+			    "base_historico": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "base_historico"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "base historico": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "base_historico": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        }
+			      ]
+			    },
+			    "base_historico.ra": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "base_historico",
+			          "ConceptualProperty": "RA"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "ra": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "base_historico.fase": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "base_historico",
+			          "ConceptualProperty": "Fase"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "fase": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "base_historico.turma": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "base_historico",
+			          "ConceptualProperty": "Turma"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "turma": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "base_historico.nome_anonimizado": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "base_historico",
+			          "ConceptualProperty": "Nome Anonimizado"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "nome anonimizado": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "base_historico.ano_nasc": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "base_historico",
+			          "ConceptualProperty": "Ano nasc"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "ano nasc": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "base_historico.idade": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "base_historico",
+			          "ConceptualProperty": "Idade"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "idade": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "base_historico.gênero": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "base_historico",
+			          "ConceptualProperty": "Gênero"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "gênero": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "base_historico.ano_ingresso": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "base_historico",
+			          "ConceptualProperty": "Ano ingresso"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "ano ingresso": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "base_historico.instituição_de_ensino": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "base_historico",
+			          "ConceptualProperty": "Instituição de ensino"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "instituição de ensino": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "base_historico.pedra": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "base_historico",
+			          "ConceptualProperty": "Pedra"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "pedra": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "base_historico.inde": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "base_historico",
+			          "ConceptualProperty": "INDE"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "inde": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "base_historico.nº_av": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "base_historico",
+			          "ConceptualProperty": "Nº Av"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "nº av": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "base_historico.iaa": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "base_historico",
+			          "ConceptualProperty": "IAA"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "iaa": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "base_historico.ieg": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "base_historico",
+			          "ConceptualProperty": "IEG"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "ieg": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "base_historico.ip": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "base_historico",
+			          "ConceptualProperty": "IPS"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "ip": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "base_historico.ida": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "base_historico",
+			          "ConceptualProperty": "IDA"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "ida": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "base_historico.mat": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "base_historico",
+			          "ConceptualProperty": "Mat"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "mat": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "doormat": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "bathmat": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "runner": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "floorcovering": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "rug": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "carpet": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "floor-covering": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "placemat": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.466
+			          }
+			        },
+			        {
+			          "doyly": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.466
+			          }
+			        },
+			        {
+			          "doily": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.466
+			          }
+			        }
+			      ]
+			    },
+			    "base_historico.por": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "base_historico",
+			          "ConceptualProperty": "Por"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "por": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "base_historico.ing": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "base_historico",
+			          "ConceptualProperty": "Ing"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "ing": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "base_historico.ipv": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "base_historico",
+			          "ConceptualProperty": "IPV"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "ipv": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "base_historico.ian": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "base_historico",
+			          "ConceptualProperty": "IAN"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "ian": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "base_historico.fase_ideal": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "base_historico",
+			          "ConceptualProperty": "Fase Ideal"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "fase ideal": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "fase epitome": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.475
+			          }
+			        },
+			        {
+			          "fase archetype": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.475
+			          }
+			        },
+			        {
+			          "fase essence": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.475
+			          }
+			        },
+			        {
+			          "fase paradigm": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.475
+			          }
+			        },
+			        {
+			          "fase icon": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.475
+			          }
+			        },
+			        {
+			          "fase exemplar": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.475
+			          }
+			        },
+			        {
+			          "fase height": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.475
+			          }
+			        },
+			        {
+			          "fase model": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.461
+			          }
+			        },
+			        {
+			          "fase stereotype": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.461
+			          }
+			        },
+			        {
+			          "fase principle": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.451
+			          }
+			        }
+			      ]
+			    },
+			    "base_historico.defasagem": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "base_historico",
+			          "ConceptualProperty": "Defasagem"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "defasagem": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "base_historico.ano": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "base_historico",
+			          "ConceptualProperty": "Ano"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "ano": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "base_historico.data_de_nasc": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "base_historico",
+			          "ConceptualProperty": "Data de Nasc"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "data de nasc": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "information de nasc": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.609
+			          }
+			        },
+			        {
+			          "fact de nasc": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.609
+			          }
+			        },
+			        {
+			          "info de nasc": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.609
+			          }
+			        },
+			        {
+			          "statistic de nasc": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.609
+			          }
+			        },
+			        {
+			          "document de nasc": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.591
+			          }
+			        },
+			        {
+			          "figure de nasc": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.591
+			          }
+			        },
+			        {
+			          "record de nasc": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.591
+			          }
+			        }
+			      ]
+			    },
+			    "base_historico.ipp": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "base_historico",
+			          "ConceptualProperty": "IPP"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "ipp": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "base_historico.escola": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "base_historico",
+			          "ConceptualProperty": "Escola"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "escola": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "base_historico.ativo__inativo": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "base_historico",
+			          "ConceptualProperty": "Ativo/ Inativo"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "ativo/ inativo": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "ativo": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "ativo inativo": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "inativo": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        }
+			      ]
+			    },
+			    "medida": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Medidas"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "medida": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "medida.column": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Medidas",
+			          "ConceptualProperty": "Column"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "column": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "pilaster": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "pier": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "pillar": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "post": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "support": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "stake": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "pole": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "buttress": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "underpinning": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "contribution": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.466
+			          }
+			        }
+			      ]
+			    },
+			    "medida.média_INDE": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Medidas",
+			          "ConceptualProperty": "Média INDE"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "média INDE": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "medida.média_IDA": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Medidas",
+			          "ConceptualProperty": "Média IDA"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "média IDA": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "medida.média_IAA": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Medidas",
+			          "ConceptualProperty": "Média IAA"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "média IAA": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "medida.gap_autoavaliação": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Medidas",
+			          "ConceptualProperty": "Gap Autoavaliação"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "gap autoavaliação": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "Gap de Otimismo (Pontos Acima da Realidade)": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "medida.total_alunos": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Medidas",
+			          "ConceptualProperty": "Total Alunos"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "total alunos": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "aggregate aluno": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.582
+			          }
+			        },
+			        {
+			          "overall aluno": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.582
+			          }
+			        }
+			      ]
+			    },
+			    "medida.alunos_com_defasagem": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Medidas",
+			          "ConceptualProperty": "% Alunos com Defasagem"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "% alunos com defasagem": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "percentage aluno com defasagem": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.617
+			          }
+			        },
+			        {
+			          "pct aluno com defasagem": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.599
+			          }
+			        }
+			      ]
+			    },
+			    "medida.IDA_fase_crítica": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Medidas",
+			          "ConceptualProperty": "IDA Fase Crítica"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "IDA fase crítica": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "medida.média_IPV": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Medidas",
+			          "ConceptualProperty": "Média IPV"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "média IPV": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "tabela": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Tabela"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "tabela": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "tabela.indicador": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Tabela",
+			          "ConceptualProperty": "Indicador"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "indicador": {
+			            "State": "Generated"
+			          }
+			        }
+			      ]
+			    },
+			    "tabela.força_no_desempenho": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Tabela",
+			          "ConceptualProperty": "Força no Desempenho"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "força no desempenho": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "força number desempenho": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.591
+			          }
+			        }
+			      ]
+			    }
+			  },
+			  "Relationships": {
+			    "base_historico_has_medida_IDA_fase_crítica": {
+			      "Binding": {
+			        "ConceptualEntity": "base_historico"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "base_historico": {
+			          "Target": {
+			            "Entity": "base_historico"
+			          }
+			        },
+			        "medida.IDA_fase_crítica": {
+			          "Target": {
+			            "Entity": "medida.IDA_fase_crítica"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "base_historico"
+			            },
+			            "Object": {
+			              "Role": "medida.IDA_fase_crítica"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "base_historicos_have_IDA_fase_crítica"
+			        }
+			      ]
+			    },
+			    "base_historico_has_medida_alunos_com_defasagem": {
+			      "Binding": {
+			        "ConceptualEntity": "base_historico"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "base_historico": {
+			          "Target": {
+			            "Entity": "base_historico"
+			          }
+			        },
+			        "medida.alunos_com_defasagem": {
+			          "Target": {
+			            "Entity": "medida.alunos_com_defasagem"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "base_historico"
+			            },
+			            "Object": {
+			              "Role": "medida.alunos_com_defasagem"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "base_historicos_have__alunos_com_defasagem"
+			        }
+			      ]
+			    },
+			    "base_historico_has_medida_total_alunos": {
+			      "Binding": {
+			        "ConceptualEntity": "base_historico"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "base_historico": {
+			          "Target": {
+			            "Entity": "base_historico"
+			          }
+			        },
+			        "medida.total_alunos": {
+			          "Target": {
+			            "Entity": "medida.total_alunos"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "base_historico"
+			            },
+			            "Object": {
+			              "Role": "medida.total_alunos"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "base_historicos_have_total_alunos"
+			        }
+			      ]
+			    },
+			    "base_historico_has_medida_gap_autoavaliação": {
+			      "Binding": {
+			        "ConceptualEntity": "base_historico"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "base_historico": {
+			          "Target": {
+			            "Entity": "base_historico"
+			          }
+			        },
+			        "medida.gap_autoavaliação": {
+			          "Target": {
+			            "Entity": "medida.gap_autoavaliação"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "base_historico"
+			            },
+			            "Object": {
+			              "Role": "medida.gap_autoavaliação"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "base_historicos_have_gap_autoavaliação"
+			        }
+			      ]
+			    },
+			    "base_historico_has_medida_média_IAA": {
+			      "Binding": {
+			        "ConceptualEntity": "base_historico"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "base_historico": {
+			          "Target": {
+			            "Entity": "base_historico"
+			          }
+			        },
+			        "medida.média_IAA": {
+			          "Target": {
+			            "Entity": "medida.média_IAA"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "base_historico"
+			            },
+			            "Object": {
+			              "Role": "medida.média_IAA"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "base_historicos_have_média_IAA"
+			        }
+			      ]
+			    },
+			    "base_historico_has_medida_média_IDA": {
+			      "Binding": {
+			        "ConceptualEntity": "base_historico"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "base_historico": {
+			          "Target": {
+			            "Entity": "base_historico"
+			          }
+			        },
+			        "medida.média_IDA": {
+			          "Target": {
+			            "Entity": "medida.média_IDA"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "base_historico"
+			            },
+			            "Object": {
+			              "Role": "medida.média_IDA"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "base_historicos_have_média_IDA"
+			        }
+			      ]
+			    },
+			    "base_historico_has_medida_média_INDE": {
+			      "Binding": {
+			        "ConceptualEntity": "base_historico"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "base_historico": {
+			          "Target": {
+			            "Entity": "base_historico"
+			          }
+			        },
+			        "medida.média_INDE": {
+			          "Target": {
+			            "Entity": "medida.média_INDE"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "base_historico"
+			            },
+			            "Object": {
+			              "Role": "medida.média_INDE"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "base_historicos_have_média_INDE"
+			        }
+			      ]
+			    },
+			    "base_historico_has_ativo__inativo": {
+			      "Binding": {
+			        "ConceptualEntity": "base_historico"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "base_historico": {
+			          "Target": {
+			            "Entity": "base_historico"
+			          }
+			        },
+			        "base_historico.ativo__inativo": {
+			          "Target": {
+			            "Entity": "base_historico.ativo__inativo"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "base_historico"
+			            },
+			            "Object": {
+			              "Role": "base_historico.ativo__inativo"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "base_historicos_have_ativo__inativos"
+			        }
+			      ]
+			    },
+			    "base_historico_has_escola": {
+			      "Binding": {
+			        "ConceptualEntity": "base_historico"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "base_historico": {
+			          "Target": {
+			            "Entity": "base_historico"
+			          }
+			        },
+			        "base_historico.escola": {
+			          "Target": {
+			            "Entity": "base_historico.escola"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "base_historico"
+			            },
+			            "Object": {
+			              "Role": "base_historico.escola"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "base_historicos_have_escolas"
+			        }
+			      ]
+			    },
+			    "base_historico_has_ipp": {
+			      "Binding": {
+			        "ConceptualEntity": "base_historico"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "base_historico": {
+			          "Target": {
+			            "Entity": "base_historico"
+			          }
+			        },
+			        "base_historico.ipp": {
+			          "Target": {
+			            "Entity": "base_historico.ipp"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "base_historico"
+			            },
+			            "Object": {
+			              "Role": "base_historico.ipp"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "base_historicos_have_ipps"
+			        }
+			      ]
+			    },
+			    "base_historico_has_data_de_nasc": {
+			      "Binding": {
+			        "ConceptualEntity": "base_historico"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "base_historico": {
+			          "Target": {
+			            "Entity": "base_historico"
+			          }
+			        },
+			        "base_historico.data_de_nasc": {
+			          "Target": {
+			            "Entity": "base_historico.data_de_nasc"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "base_historico"
+			            },
+			            "Object": {
+			              "Role": "base_historico.data_de_nasc"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "base_historicos_have_data_de_nascs"
+			        }
+			      ]
+			    },
+			    "base_historico_has_ano": {
+			      "Binding": {
+			        "ConceptualEntity": "base_historico"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "base_historico": {
+			          "Target": {
+			            "Entity": "base_historico"
+			          }
+			        },
+			        "base_historico.ano": {
+			          "Target": {
+			            "Entity": "base_historico.ano"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "base_historico"
+			            },
+			            "Object": {
+			              "Role": "base_historico.ano"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "base_historicos_have_anos"
+			        }
+			      ]
+			    },
+			    "base_historico_has_defasagem": {
+			      "Binding": {
+			        "ConceptualEntity": "base_historico"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "base_historico": {
+			          "Target": {
+			            "Entity": "base_historico"
+			          }
+			        },
+			        "base_historico.defasagem": {
+			          "Target": {
+			            "Entity": "base_historico.defasagem"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "base_historico"
+			            },
+			            "Object": {
+			              "Role": "base_historico.defasagem"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "base_historicos_have_defasagems"
+			        }
+			      ]
+			    },
+			    "base_historico_has_fase_ideal": {
+			      "Binding": {
+			        "ConceptualEntity": "base_historico"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "base_historico": {
+			          "Target": {
+			            "Entity": "base_historico"
+			          }
+			        },
+			        "base_historico.fase_ideal": {
+			          "Target": {
+			            "Entity": "base_historico.fase_ideal"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "base_historico"
+			            },
+			            "Object": {
+			              "Role": "base_historico.fase_ideal"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "base_historicos_have_fase_ideals"
+			        }
+			      ]
+			    },
+			    "base_historico_has_ian": {
+			      "Binding": {
+			        "ConceptualEntity": "base_historico"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "base_historico": {
+			          "Target": {
+			            "Entity": "base_historico"
+			          }
+			        },
+			        "base_historico.ian": {
+			          "Target": {
+			            "Entity": "base_historico.ian"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "base_historico"
+			            },
+			            "Object": {
+			              "Role": "base_historico.ian"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "base_historicos_have_ian"
+			        }
+			      ]
+			    },
+			    "base_historico_has_ipv": {
+			      "Binding": {
+			        "ConceptualEntity": "base_historico"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "base_historico": {
+			          "Target": {
+			            "Entity": "base_historico"
+			          }
+			        },
+			        "base_historico.ipv": {
+			          "Target": {
+			            "Entity": "base_historico.ipv"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "base_historico"
+			            },
+			            "Object": {
+			              "Role": "base_historico.ipv"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "base_historicos_have_ipvs"
+			        }
+			      ]
+			    },
+			    "base_historico_has_ing": {
+			      "Binding": {
+			        "ConceptualEntity": "base_historico"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "base_historico": {
+			          "Target": {
+			            "Entity": "base_historico"
+			          }
+			        },
+			        "base_historico.ing": {
+			          "Target": {
+			            "Entity": "base_historico.ing"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "base_historico"
+			            },
+			            "Object": {
+			              "Role": "base_historico.ing"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "base_historicos_have_ings"
+			        }
+			      ]
+			    },
+			    "base_historico_has_por": {
+			      "Binding": {
+			        "ConceptualEntity": "base_historico"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "base_historico": {
+			          "Target": {
+			            "Entity": "base_historico"
+			          }
+			        },
+			        "base_historico.por": {
+			          "Target": {
+			            "Entity": "base_historico.por"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "base_historico"
+			            },
+			            "Object": {
+			              "Role": "base_historico.por"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "base_historicos_have_pors"
+			        }
+			      ]
+			    },
+			    "base_historico_has_mat": {
+			      "Binding": {
+			        "ConceptualEntity": "base_historico"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "base_historico": {
+			          "Target": {
+			            "Entity": "base_historico"
+			          }
+			        },
+			        "base_historico.mat": {
+			          "Target": {
+			            "Entity": "base_historico.mat"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "base_historico"
+			            },
+			            "Object": {
+			              "Role": "base_historico.mat"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "base_historicos_have_mats"
+			        }
+			      ]
+			    },
+			    "base_historico_has_ida": {
+			      "Binding": {
+			        "ConceptualEntity": "base_historico"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "base_historico": {
+			          "Target": {
+			            "Entity": "base_historico"
+			          }
+			        },
+			        "base_historico.ida": {
+			          "Target": {
+			            "Entity": "base_historico.ida"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "base_historico"
+			            },
+			            "Object": {
+			              "Role": "base_historico.ida"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "base_historicos_have_ida"
+			        }
+			      ]
+			    },
+			    "base_historico_has_ip": {
+			      "Binding": {
+			        "ConceptualEntity": "base_historico"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "base_historico": {
+			          "Target": {
+			            "Entity": "base_historico"
+			          }
+			        },
+			        "base_historico.ip": {
+			          "Target": {
+			            "Entity": "base_historico.ip"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "base_historico"
+			            },
+			            "Object": {
+			              "Role": "base_historico.ip"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "base_historicos_have_ip"
+			        }
+			      ]
+			    },
+			    "base_historico_has_ieg": {
+			      "Binding": {
+			        "ConceptualEntity": "base_historico"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "base_historico": {
+			          "Target": {
+			            "Entity": "base_historico"
+			          }
+			        },
+			        "base_historico.ieg": {
+			          "Target": {
+			            "Entity": "base_historico.ieg"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "base_historico"
+			            },
+			            "Object": {
+			              "Role": "base_historico.ieg"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "base_historicos_have_iegs"
+			        }
+			      ]
+			    },
+			    "base_historico_has_iaa": {
+			      "Binding": {
+			        "ConceptualEntity": "base_historico"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "base_historico": {
+			          "Target": {
+			            "Entity": "base_historico"
+			          }
+			        },
+			        "base_historico.iaa": {
+			          "Target": {
+			            "Entity": "base_historico.iaa"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "base_historico"
+			            },
+			            "Object": {
+			              "Role": "base_historico.iaa"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "base_historicos_have_iaa"
+			        }
+			      ]
+			    },
+			    "base_historico_has_nº_av": {
+			      "Binding": {
+			        "ConceptualEntity": "base_historico"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "base_historico": {
+			          "Target": {
+			            "Entity": "base_historico"
+			          }
+			        },
+			        "base_historico.nº_av": {
+			          "Target": {
+			            "Entity": "base_historico.nº_av"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "base_historico"
+			            },
+			            "Object": {
+			              "Role": "base_historico.nº_av"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "base_historicos_have_nº_av"
+			        }
+			      ]
+			    },
+			    "base_historico_has_inde": {
+			      "Binding": {
+			        "ConceptualEntity": "base_historico"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "base_historico": {
+			          "Target": {
+			            "Entity": "base_historico"
+			          }
+			        },
+			        "base_historico.inde": {
+			          "Target": {
+			            "Entity": "base_historico.inde"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "base_historico"
+			            },
+			            "Object": {
+			              "Role": "base_historico.inde"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "base_historicos_have_indes"
+			        }
+			      ]
+			    },
+			    "base_historico_has_pedra": {
+			      "Binding": {
+			        "ConceptualEntity": "base_historico"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "base_historico": {
+			          "Target": {
+			            "Entity": "base_historico"
+			          }
+			        },
+			        "base_historico.pedra": {
+			          "Target": {
+			            "Entity": "base_historico.pedra"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "base_historico"
+			            },
+			            "Object": {
+			              "Role": "base_historico.pedra"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "base_historicos_have_pedras"
+			        }
+			      ]
+			    },
+			    "base_historico_has_instituição_de_ensino": {
+			      "Binding": {
+			        "ConceptualEntity": "base_historico"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "base_historico": {
+			          "Target": {
+			            "Entity": "base_historico"
+			          }
+			        },
+			        "base_historico.instituição_de_ensino": {
+			          "Target": {
+			            "Entity": "base_historico.instituição_de_ensino"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "base_historico"
+			            },
+			            "Object": {
+			              "Role": "base_historico.instituição_de_ensino"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "base_historicos_have_instituição_de_ensinos"
+			        }
+			      ]
+			    },
+			    "base_historico_has_ano_ingresso": {
+			      "Binding": {
+			        "ConceptualEntity": "base_historico"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "base_historico": {
+			          "Target": {
+			            "Entity": "base_historico"
+			          }
+			        },
+			        "base_historico.ano_ingresso": {
+			          "Target": {
+			            "Entity": "base_historico.ano_ingresso"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "base_historico"
+			            },
+			            "Object": {
+			              "Role": "base_historico.ano_ingresso"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "base_historicos_have_ano_ingressos"
+			        }
+			      ]
+			    },
+			    "base_historico_has_gênero": {
+			      "Binding": {
+			        "ConceptualEntity": "base_historico"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "base_historico": {
+			          "Target": {
+			            "Entity": "base_historico"
+			          }
+			        },
+			        "base_historico.gênero": {
+			          "Target": {
+			            "Entity": "base_historico.gênero"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "base_historico"
+			            },
+			            "Object": {
+			              "Role": "base_historico.gênero"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "base_historicos_have_gêneros"
+			        }
+			      ]
+			    },
+			    "base_historico_has_idade": {
+			      "Binding": {
+			        "ConceptualEntity": "base_historico"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "base_historico": {
+			          "Target": {
+			            "Entity": "base_historico"
+			          }
+			        },
+			        "base_historico.idade": {
+			          "Target": {
+			            "Entity": "base_historico.idade"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "base_historico"
+			            },
+			            "Object": {
+			              "Role": "base_historico.idade"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "base_historicos_have_idades"
+			        }
+			      ]
+			    },
+			    "base_historico_has_ano_nasc": {
+			      "Binding": {
+			        "ConceptualEntity": "base_historico"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "base_historico": {
+			          "Target": {
+			            "Entity": "base_historico"
+			          }
+			        },
+			        "base_historico.ano_nasc": {
+			          "Target": {
+			            "Entity": "base_historico.ano_nasc"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "base_historico"
+			            },
+			            "Object": {
+			              "Role": "base_historico.ano_nasc"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "base_historicos_have_ano_nascs"
+			        }
+			      ]
+			    },
+			    "base_historico_has_nome_anonimizado": {
+			      "Binding": {
+			        "ConceptualEntity": "base_historico"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "base_historico": {
+			          "Target": {
+			            "Entity": "base_historico"
+			          }
+			        },
+			        "base_historico.nome_anonimizado": {
+			          "Target": {
+			            "Entity": "base_historico.nome_anonimizado"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "base_historico"
+			            },
+			            "Object": {
+			              "Role": "base_historico.nome_anonimizado"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "base_historicos_have_nome_anonimizados"
+			        }
+			      ]
+			    },
+			    "base_historico_has_turma": {
+			      "Binding": {
+			        "ConceptualEntity": "base_historico"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "base_historico": {
+			          "Target": {
+			            "Entity": "base_historico"
+			          }
+			        },
+			        "base_historico.turma": {
+			          "Target": {
+			            "Entity": "base_historico.turma"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "base_historico"
+			            },
+			            "Object": {
+			              "Role": "base_historico.turma"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "base_historicos_have_turmas"
+			        }
+			      ]
+			    },
+			    "base_historico_has_fase": {
+			      "Binding": {
+			        "ConceptualEntity": "base_historico"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "base_historico": {
+			          "Target": {
+			            "Entity": "base_historico"
+			          }
+			        },
+			        "base_historico.fase": {
+			          "Target": {
+			            "Entity": "base_historico.fase"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "base_historico"
+			            },
+			            "Object": {
+			              "Role": "base_historico.fase"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "base_historicos_have_fases"
+			        }
+			      ]
+			    },
+			    "base_historico_has_ra": {
+			      "Binding": {
+			        "ConceptualEntity": "base_historico"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "base_historico": {
+			          "Target": {
+			            "Entity": "base_historico"
+			          }
+			        },
+			        "base_historico.ra": {
+			          "Target": {
+			            "Entity": "base_historico.ra"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "base_historico"
+			            },
+			            "Object": {
+			              "Role": "base_historico.ra"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "base_historicos_have_ra"
+			        }
+			      ]
+			    },
+			    "base_historico_has_medida_média_IPV": {
+			      "Binding": {
+			        "ConceptualEntity": "base_historico"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "base_historico": {
+			          "Target": {
+			            "Entity": "base_historico"
+			          }
+			        },
+			        "medida.média_IPV": {
+			          "Target": {
+			            "Entity": "medida.média_IPV"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "base_historico"
+			            },
+			            "Object": {
+			              "Role": "medida.média_IPV"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "base_historicos_have_média_IPV"
+			        }
+			      ]
+			    },
+			    "tabela_has_indicador": {
+			      "Binding": {
+			        "ConceptualEntity": "Tabela"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "tabela": {
+			          "Target": {
+			            "Entity": "tabela"
+			          }
+			        },
+			        "tabela.indicador": {
+			          "Target": {
+			            "Entity": "tabela.indicador"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "tabela"
+			            },
+			            "Object": {
+			              "Role": "tabela.indicador"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "tabelas_have_indicadors"
+			        }
+			      ]
+			    },
+			    "tabela_has_força_no_desempenho": {
+			      "Binding": {
+			        "ConceptualEntity": "Tabela"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "tabela": {
+			          "Target": {
+			            "Entity": "tabela"
+			          }
+			        },
+			        "tabela.força_no_desempenho": {
+			          "Target": {
+			            "Entity": "tabela.força_no_desempenho"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "tabela"
+			            },
+			            "Object": {
+			              "Role": "tabela.força_no_desempenho"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "tabelas_have_força_no_desempenhos"
+			        }
+			      ]
+			    }
+			  },
+			  "Agents": {
+			    "Internal": {
+			      "Version": "1.1.0"
+			    }
+			  }
+			}
+		contentType: json
+
