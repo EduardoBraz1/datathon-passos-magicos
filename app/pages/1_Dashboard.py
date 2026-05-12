@@ -6,7 +6,7 @@ import plotly.express as px
 st.title("📊 Dashboard Executivo")
 
 # carregar base
-df = pd.read_csv("data/base_historico.csv")
+df = pd.read_csv("data/processed/base_historico.csv")
 
 # KPIs
 col1, col2, col3 = st.columns(3)
