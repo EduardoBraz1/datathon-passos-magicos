@@ -1,9 +1,24 @@
 # Modelo de Risco Acadêmico — Passos Mágicos
 
-Pipeline completo: **LogReg + LightGBM + XGBoost + MLP + Stacking + Ensemble
-por média.** Treino temporal sobre a transição 2022→2023 e hold-out cego sobre
-2023→2024. Todas as decisões abaixo são tecnicamente defensáveis e livres de
-*data leakage* (calibração, imputers e encoders são `fit` apenas no treino).
+**Modelo principal (Iter5):** LightGBM seed-bag×3 sobre 136 features
+(painel longitudinal 2022-2024 + Pedra-history + interactions + razões +
+quadráticas/log1p + train fase-mean lookup). **Alvo primário =
+`risk_defasagem_worsen`**. No hold-out 2023→2024: **ROC-AUC 0,846, PR-AUC
+0,817, Brier 0,164, F1@thr=0,59 = 0,609, Recall@top-10 % = 0,220**. Painel
+completo (LogReg + XGBoost + MLP + Stacking) preserva auditabilidade.
+
+Treino temporal sobre a transição 2022→2023 e hold-out cego sobre
+2023→2024. Todas as decisões são tecnicamente defensáveis e livres de
+*data leakage* (calibração, imputers, scalers e encoders são `fit` apenas
+no treino). O modelo **secundário** (`risk_composite`) com mesma arquitetura
+fica em `models/lgbm_composite.pkl` e na coluna `prob_composite` do CSV
+para a NGO ter uma visão holística complementar (ROC 0,773 / PR 0,849).
+
+Reprodução em um comando:
+
+```bash
+.venv/bin/python scripts/run_pipeline.py
+```
 
 ---
 
@@ -465,7 +480,101 @@ inerentemente mais fácil.
 
 ---
 
-## 9. Por que não bateu 0,78? Hipótese honesta
+## 9. Consolidação (Iteração 5)
+
+### Decisão de alvo
+
+A Iteração 4 mostrou que o **mesmo pipeline Iter4-B** atinge **ROC-AUC 0,846 /
+PR-AUC 0,817 / Brier 0,164** quando o alvo é `risk_defasagem_worsen` (vs.
+0,773 / 0,849 / 0,197 no `risk_composite`). A NGO tem dois usos distintos
+para o modelo:
+
+1. **Operacional** — selecionar 200-300 alunos para acompanhamento
+   pedagógico imediato. Precisa de **ranqueamento confiável** (AUC alto).
+2. **Holístico** — entender quem está em qualquer trajetória de
+   deterioração (Pedra, INDE ou Defasagem). Precisa de **cobertura ampla**.
+
+A Iteração 5 oficializa **`risk_defasagem_worsen` como alvo primário do
+pipeline** porque (a) é a métrica com sinal mais claro e auditável,
+(b) está alinhada com a missão central da NGO (evitar atraso/reprovação
+escolar real), (c) tem prevalência moderada (43 %) que dá lift mais útil
+operacionalmente, e (d) o modelo já é interpretável via SHAP (top-3 por
+linha exposto no CSV).
+
+**Caveat honesto**: a métrica subiu de 0,773 → 0,846 ROC-AUC por **mudança
+de definição do alvo**, não por ganho de sinal — o painel é o mesmo. O
+modelo secundário (`risk_composite`) continua persistido em
+`models/lgbm_composite.pkl` e na coluna `prob_composite` do CSV principal,
+exatamente para a NGO comparar lado a lado.
+
+### Tabela final consolidada (hold-out 2023→2024)
+
+| Alvo | Prevalência | ROC-AUC | PR-AUC | Brier | F1@thr | Recall@top-10 % |
+|---|---|---|---|---|---|---|
+| **`risk_defasagem_worsen` (primário)** | 42,9 % | **0,846** | **0,817** | **0,164** | 0,609 @ 0,59 | 0,220 |
+| `risk_composite` (secundário)          | 65,2 % | 0,773   | 0,849   | 0,197 | 0,791 @ 0,29 | 0,142 |
+
+**Não-regressão Iter4→Iter5**: ROC 0,846 ≥ 0,840 ✓; PR-AUC 0,817 ≥ 0,810 ✓;
+Brier 0,164 ≤ 0,170 ✓. Tudo green.
+
+### Threshold operacional (`risk_defasagem_worsen`)
+
+Maximiza F1 sobre OOF do train (sem peek no hold-out). Valor: **0,59**.
+Aplicado ao hold-out 2023→2024, F1 = 0,609 / Recall@thr = 0,496 / Precision
+@ thr = 0,791. Para ranqueamento puro (não classificação), use top-N alunos
+ordenados por `prob_final`.
+
+### Top-15 features SHAP do alvo primário
+
+Geradas pelo LightGBM seed=42 (referência para auditoria), salvas em
+`reports/figures/lgbm_shap_top15.png` e `reports/lgbm_shap.csv`. Leitura
+(top-5 mais relevantes):
+
+1. **`Idade`** — preditor #1 disparado. Alunos mais velhos têm tipicamente
+   mais histórico acumulado de defasagem e tendem a piorar mais rápido.
+2. **`Defasagem_sq`** (engineered) — diferencia exponencialmente alunos com
+   defasagem alta hoje, sinal mais forte que o linear.
+3. **`Defasagem`** — estado atual, leitura direta.
+4. **`IPV`** — pode subir/cair conforme integração aos Princípios PV.
+5. **`Pedra_ord`** — pedra atual ordinal; alunos em Quartzo/Agata
+   concentram risco.
+
+### Distribuição prevista de risco para 2025 (1156 alunos)
+
+| Faixa | Threshold | Critério `prob_final` | n alunos | % |
+|---|---|---|---|---|
+| Alto  | ≥ 0,60 | Pedagógico imediato | 184 | 15,9 % |
+| Médio | 0,30 – 0,60 | Atenção crescente | 379 | 32,8 % |
+| Baixo | < 0,30 | Monitorar | 593 | 51,3 % |
+
+Para comparação, a faixa do **alvo composto** (`prob_composite`) dá 341
+Alto / 763 Médio / 52 Baixo — captura mais gente em qualquer estado de
+deterioração, mas ranqueia pior.
+
+### Como interpretar e agir
+
+| Cenário | Use | Ação sugerida |
+|---|---|---|
+| **Reunir os ~200 mais críticos para 2025** | `prob_final` (defasagem) | Top-N por `prob_final`, comparar com `top_3_fatores` para entender drivers. |
+| **Auditar quem caiu na Pedra ou no INDE** | `prob_composite` | Filtrar `faixa_risco_composite=Alto` no CSV principal. |
+| **Análise por sub-grupo** | `reports/auc_by_fase.csv` | Modelo é mais forte em Fund I (Fases 0-2). |
+
+### O que mudou no código (Iter5 → diff vs Iter4)
+
+- `src/risk_model/config.py`: `PRIMARY_TARGET = "risk_defasagem_worsen"`;
+  novo `SECONDARY_TARGET = "risk_composite"`.
+- `src/risk_model/features.py`: novas funções `fit_fase_mean_lookup`,
+  `apply_fase_mean_lookup` (train-only média por Fase, aplicada via lookup
+  em todas as fatias).
+- `scripts/run_pipeline.py`: integra fase-mean lookup logo após o slicing
+  e fita um modelo secundário em `risk_composite` na **Stage 10b**. Escreve
+  `prob_composite` no CSV principal e gera CSV separado
+  `predicoes_risco_2025_composto.csv`.
+- `scripts/run_iter4.py`: marcado como **deprecated** (header docstring).
+
+---
+
+## 10b. Por que não bateu 0,87 / 0,90? Hipótese honesta
 
 1. **Tamanho do treino**: 600 linhas é pequeno e a `GroupKFold` CV já mostra
    teto em **0,755** sem ver o hold-out. Ou seja, **a barra de 0,78 não está
@@ -501,7 +610,7 @@ inerentemente mais fácil.
 
 ---
 
-## 10. Como reproduzir
+## 11. Como reproduzir
 
 ```bash
 # Iter 1-3 — pipeline principal (LogReg + LGBM seed-bag + XGB + MLP + Stacking)
@@ -545,7 +654,7 @@ data/processed/predicoes_risco_2025.csv
 
 ---
 
-## 11. Como interpretar e agir
+## 12. Como interpretar e agir
 
 | Faixa | Score | Recomendação operacional |
 |---|---|---|
@@ -560,7 +669,7 @@ começar perguntando especificamente por esses três aspectos.
 
 ---
 
-## 12. Notas operacionais
+## 13. Notas operacionais
 
 - **Reprodutibilidade total**: `random_state=42` em todo o pipeline; o MLP usa
   `seed=42 + fold` em cada dobra para diversificar mas determinístico.

@@ -66,7 +66,8 @@ TARGET_VARIANTS: List[str] = [
     "risk_defasagem_worsen",
     "risk_composite",
 ]
-PRIMARY_TARGET: str = "risk_composite"
+PRIMARY_TARGET: str = "risk_defasagem_worsen"  # Iter5: ranking-oriented primary
+SECONDARY_TARGET: str = "risk_composite"        # kept for the holistic view
 
 # Risk-band cut-offs used in the predictions deliverable.
 RISK_BAND_LOW: float = 0.30

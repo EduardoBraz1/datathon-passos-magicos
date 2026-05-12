@@ -1,4 +1,19 @@
-"""Iteration 4 — aggressive push above 0.78 ROC-AUC on the composite target,
+"""DEPRECATED — kept for audit only.
+
+The interaction + train-only fase-mean lookup features that this script
+prototyped have been promoted to the main pipeline in
+``scripts/run_pipeline.py`` + ``src/risk_model/features.py``.  ``PRIMARY_TARGET``
+is now ``risk_defasagem_worsen`` and the composite target lives alongside as
+``SECONDARY_TARGET``.  Reproduce the full pipeline in a single command:
+
+    .venv/bin/python scripts/run_pipeline.py
+
+This script remains in the tree so the iter4 experimental record is
+auditable; do not depend on it for new workflows.
+
+(Original iter4 description below.)
+
+Iteration 4 — aggressive push above 0.78 ROC-AUC on the composite target,
 plus an honest comparison on the three constituent targets.
 
 Pipeline (in order):

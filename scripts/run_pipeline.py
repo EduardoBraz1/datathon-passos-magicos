@@ -153,6 +153,17 @@ def assemble() -> Datasets:
     X_va, y_va, g_va = slice_year(config.VAL_YEAR, with_target=True)
     X_pr, pr_ra = slice_year(config.PREDICT_YEAR, with_target=False)
 
+    # Iter5: train-only fase-mean lookup applied to every slice.  The fit
+    # happens **only** on X_tr to avoid any val/predict information leaking
+    # into the train features.
+    fase_mean = features.fit_fase_mean_lookup(X_tr)
+    new_cols = []
+    for X in (X_tr, X_va, X_pr):
+        new_cols = features.apply_fase_mean_lookup(X, fase_mean)
+    if new_cols:
+        feature_cols = list(feature_cols) + new_cols
+        LOG.info("Iter5: added %d <ind>_minus_fase_mean features.", len(new_cols))
+
     # Drop features that are 100% NaN inside the train year — they cannot
     # contribute to learning (e.g. IPP was introduced in 2023 so it's all-NaN
     # in 2022 and produces unstable scalers/imputers downstream).
@@ -166,7 +177,8 @@ def assemble() -> Datasets:
         X_pr = X_pr.drop(columns=all_nan_in_train)
 
     LOG.info(
-        "Assembled — train n=%d (pos=%.2f%%); val n=%d (pos=%.2f%%); predict n=%d; features=%d",
+        "Assembled — target=%s | train n=%d (pos=%.2f%%); val n=%d (pos=%.2f%%); predict n=%d; features=%d",
+        config.PRIMARY_TARGET,
         len(X_tr), 100 * y_tr.mean(), len(X_va), 100 * y_va.mean(), len(X_pr), len(feature_cols),
     )
     return Datasets(panel, X_tr, y_tr, g_tr, X_va, y_va, g_va, X_pr, pr_ra, feature_cols)
@@ -923,6 +935,71 @@ def main() -> int:
     )
     imp_xgb.to_csv(config.REPORTS_DIR / "xgb_shap.csv", index=False)
 
+    LOG.info("=== Stage 10b — Secondary target (composite) ===")
+    # Iter5: also fit a small LGBM on the secondary target so the operator can
+    # compare a "queda de defasagem" model with the holistic "qualquer
+    # deterioração" model side-by-side.  Same X / same RAs, different y.
+    sec_target = getattr(config, "SECONDARY_TARGET", "risk_composite")
+    sec_train_y = target.build_targets(ds.panel, config.TRAIN_YEAR)[sec_target]
+    sec_val_y   = target.build_targets(ds.panel, config.VAL_YEAR)[sec_target]
+    # Align to the same X rows as the primary target.  Drop any row whose
+    # secondary label is missing (rare; happens only when primary target was
+    # computable but secondary wasn't).
+    y_tr_sec_full = ds.groups_train.map(sec_train_y.to_dict())
+    y_va_sec_full = ds.groups_val.map(sec_val_y.to_dict())
+    mask_tr = y_tr_sec_full.notna().values
+    mask_va = y_va_sec_full.notna().values
+    X_tr_sec = ds.X_train.loc[mask_tr].reset_index(drop=True)
+    X_va_sec = ds.X_val.loc[mask_va].reset_index(drop=True)
+    y_tr_sec = y_tr_sec_full[mask_tr].astype("int8").values
+    y_va_sec = y_va_sec_full[mask_va].astype("int8").values
+    sec_seeds = (42, 7, 2024)
+    sec_models, sec_val_probas, sec_pred_probas = [], [], []
+    for seed in sec_seeds:
+        full = dict(LGBM_BASE)
+        full.update({"num_leaves": 15, "min_child_samples": 40,
+                     "learning_rate": 0.05, "random_state": seed,
+                     "n_estimators": 2000})
+        m_sec = lgb.LGBMClassifier(**full)
+        m_sec.fit(X_tr_sec, y_tr_sec, eval_set=[(X_va_sec, y_va_sec)],
+                  eval_metric="auc",
+                  callbacks=[lgb.early_stopping(80, verbose=False),
+                             lgb.log_evaluation(0)])
+        sec_models.append(m_sec)
+        sec_val_probas.append(m_sec.predict_proba(X_va_sec)[:, 1])
+        sec_pred_probas.append(m_sec.predict_proba(ds.X_predict)[:, 1])
+    sec_val_proba = np.mean(sec_val_probas, axis=0)
+    sec_pred_proba = np.mean(sec_pred_probas, axis=0)
+    sec_metrics = {
+        "target": sec_target,
+        "prevalence": float(np.mean(y_va_sec)),
+        "roc_auc": float(roc_auc_score(y_va_sec, sec_val_proba)),
+        "pr_auc": float(average_precision_score(y_va_sec, sec_val_proba)),
+        "brier": float(brier_score_loss(y_va_sec, sec_val_proba)),
+        "recall_at_top_decile": float(recall_at_top_decile(y_va_sec, sec_val_proba)),
+    }
+    LOG.info("Secondary (%s): %s", sec_target, sec_metrics)
+    metrics_full["Secondary_LGBM"] = sec_metrics
+    metrics_full["iter5_consolidado"] = {
+        "primary_target": config.PRIMARY_TARGET,
+        "secondary_target": sec_target,
+        "primary_lgbm_raw": metrics_full.get("LightGBM_raw"),
+        "secondary_lgbm": sec_metrics,
+        "non_regression_check": {
+            "roc_auc_threshold": 0.840,
+            "pr_auc_threshold": 0.810,
+            "brier_threshold": 0.170,
+            "passed_roc": bool(metrics_full["LightGBM_raw"]["roc_auc"] >= 0.840),
+            "passed_pr": bool(metrics_full["LightGBM_raw"]["pr_auc"] >= 0.810),
+            "passed_brier": bool(metrics_full["LightGBM_raw"]["brier"] <= 0.170),
+        },
+    }
+    # Re-persist metrics_full now that Stage 10b numbers are available.
+    (config.MODELS_DIR / "metrics_full.json").write_text(
+        json.dumps(metrics_full, indent=2, ensure_ascii=False), encoding="utf-8"
+    )
+    joblib.dump(sec_models, config.MODELS_DIR / "lgbm_composite.pkl")
+
     LOG.info("=== Stage 11 — Predictions for 2025 ===")
     # Score predict-year via the seed-bag average; calibrated path uses the
     # CV-trained CalibratedClassifierCV.
@@ -975,6 +1052,7 @@ def main() -> int:
         "prob_mlp": np.round(mlp_pred_cal, 4),
         "prob_stacking": np.round(stack_pred, 4),
         "prob_final": np.round(finalist_pred, 4),
+        "prob_composite": np.round(sec_pred_proba, 4),
         "top_3_fatores": top3,
     })
 
@@ -989,6 +1067,22 @@ def main() -> int:
     out = out.sort_values("prob_final", ascending=False).reset_index(drop=True)
     out.to_csv(config.PREDICTIONS_CSV, index=False)
     LOG.info("Predictions saved to %s", config.PREDICTIONS_CSV)
+
+    # Iter5: also persist a composite-only file for the holistic view, so
+    # both views of risk live side-by-side in data/processed/.
+    composite_csv = config.DATA_PROCESSED / "predicoes_risco_2025_composto.csv"
+    out_comp = pd.DataFrame({
+        "RA": ra_index,
+        "Nome Anonimizado": pred_year.loc[ra_index, "Nome Anonimizado"].values,
+        "Fase": pred_year.loc[ra_index, "Fase"].values,
+        "Pedra atual": pred_year.loc[ra_index, "Pedra"].values,
+        "INDE atual": pred_year.loc[ra_index, "INDE"].values,
+        "prob_composite": np.round(sec_pred_proba, 4),
+    })
+    out_comp["faixa_risco_composite"] = out_comp["prob_composite"].apply(faixa)
+    out_comp = out_comp.sort_values("prob_composite", ascending=False).reset_index(drop=True)
+    out_comp.to_csv(composite_csv, index=False)
+    LOG.info("Composite-target predictions saved to %s", composite_csv)
 
     LOG.info("=== Stage 12 — Per-Fase AUC + plots ===")
     fase_series = ds.panel.query("Ano == @config.VAL_YEAR").set_index("RA").loc[ds.groups_val.values, "Fase"]

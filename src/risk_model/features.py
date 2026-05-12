@@ -288,6 +288,46 @@ def _pedra_history_features(panel: pd.DataFrame, year_t: int) -> pd.DataFrame:
     return out
 
 
+FASE_MEAN_INDICATORS = ("INDE", "IAA", "IEG", "IPS", "IDA", "IPV")
+
+
+def fit_fase_mean_lookup(X_train: pd.DataFrame,
+                         fase_col: str = "Fase",
+                         indicators: Tuple[str, ...] = FASE_MEAN_INDICATORS,
+                         ) -> Dict[str, Dict]:
+    """Fit a (Fase → mean) lookup for each indicator, **only** on the train
+    slice.  The returned dict is stable and serialisable; it is later applied
+    via :func:`apply_fase_mean_lookup` to train / val / predict slices.
+    """
+    lookup: Dict[str, Dict] = {}
+    for ind in indicators:
+        if ind not in X_train.columns:
+            continue
+        mean_by_fase = X_train.groupby(fase_col)[ind].mean().to_dict()
+        global_mean = float(X_train[ind].mean())
+        lookup[ind] = {"per_fase": mean_by_fase, "global": global_mean}
+    return lookup
+
+
+def apply_fase_mean_lookup(X: pd.DataFrame, lookup: Dict[str, Dict],
+                           fase_col: str = "Fase") -> List[str]:
+    """In-place add ``<ind>_minus_fase_mean`` columns to *X* using the fitted
+    lookup.  Returns the list of new column names for downstream tracking.
+    """
+    new_cols: List[str] = []
+    if fase_col not in X.columns:
+        return new_cols
+    fase = X[fase_col].astype("float64")
+    for ind, table in lookup.items():
+        if ind not in X.columns:
+            continue
+        mean_lookup = fase.map(table["per_fase"]).fillna(table["global"])
+        col = f"{ind}_minus_fase_mean"
+        X[col] = X[ind].astype("float64") - mean_lookup
+        new_cols.append(col)
+    return new_cols
+
+
 def _is_new_student(panel: pd.DataFrame, year_t: int) -> pd.Series:
     """1 if this is the first year of the student in the program."""
     curr = panel.query("Ano == @year_t").set_index("RA").index
