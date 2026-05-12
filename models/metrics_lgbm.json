@@ -1,0 +1,48 @@
+{
+  "lgbm_raw": {
+    "prevalence": 0.6522875816993464,
+    "roc_auc": 0.7546822969246765,
+    "pr_auc": 0.8326588231365678,
+    "brier": 0.19953981307361698,
+    "best_threshold": 0.4799999999999999,
+    "f1_at_best_threshold": 0.8081791626095424,
+    "recall_at_top_decile": 0.13226452905811623
+  },
+  "lgbm_calibrated": {
+    "prevalence": 0.6522875816993464,
+    "roc_auc": 0.7358438681875029,
+    "pr_auc": 0.8234248652545557,
+    "brier": 0.1952851726014837,
+    "best_threshold": 0.35999999999999993,
+    "f1_at_best_threshold": 0.7926829268292683,
+    "recall_at_top_decile": 0.1342685370741483
+  },
+  "_meta": {
+    "n_train": 600,
+    "n_val": 765,
+    "n_predict": 1156,
+    "n_features": 90,
+    "best_iteration": 13,
+    "target": "risk_composite",
+    "train_year": 2022,
+    "val_year": 2023,
+    "predict_year": 2024,
+    "hyperparameters": {
+      "objective": "binary",
+      "learning_rate": 0.05,
+      "num_leaves": 31,
+      "max_depth": -1,
+      "min_child_samples": 20,
+      "feature_fraction": 0.9,
+      "bagging_fraction": 0.9,
+      "bagging_freq": 5,
+      "lambda_l2": 1.0,
+      "n_estimators": 2000,
+      "is_unbalance": true,
+      "n_jobs": -1,
+      "random_state": 42,
+      "verbose": -1
+    },
+    "early_stopping_rounds": 80
+  }
+}
