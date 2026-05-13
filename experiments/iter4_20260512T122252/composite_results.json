@@ -1,0 +1,81 @@
+{
+  "Iter3_LightGBM_raw": {
+    "roc_auc": 0.7584,
+    "pr_auc": 0.8427,
+    "brier": 0.2001,
+    "f1_at_train_threshold": 0.7913,
+    "recall_at_top_decile": 0.1423
+  },
+  "B_LGBM_interactions": {
+    "n": 765,
+    "prevalence": 0.6522875816993464,
+    "roc_auc": 0.7729255503488179,
+    "pr_auc": 0.8493453288718238,
+    "brier": 0.1966211746405483,
+    "f1_at_train_threshold": 0.7911040508339953,
+    "recall_at_top_decile": 0.14228456913827656
+  },
+  "C_DART": {
+    "n": 765,
+    "prevalence": 0.6522875816993464,
+    "roc_auc": 0.7128392122591045,
+    "pr_auc": 0.8027807865128135,
+    "brier": 0.2144742573874145,
+    "f1_at_train_threshold": 0.7818343722172751,
+    "recall_at_top_decile": 0.1342685370741483
+  },
+  "D_GOSS": {
+    "n": 765,
+    "prevalence": 0.6522875816993464,
+    "roc_auc": 0.7552172013199331,
+    "pr_auc": 0.8494173465417274,
+    "brier": 0.19849514847020597,
+    "f1_at_train_threshold": 0.7895569620253164,
+    "recall_at_top_decile": 0.1462925851703407
+  },
+  "A_PerFase": {
+    "n": 765,
+    "prevalence": 0.6522875816993464,
+    "roc_auc": 0.738032455889222,
+    "pr_auc": 0.8295649663245996,
+    "brier": 0.19694161761573914,
+    "f1_at_train_threshold": 0.7892976588628763,
+    "recall_at_top_decile": 0.13627254509018036
+  },
+  "E_RankAvg_B_LGBM_interactions_C_DART": {
+    "n": 765,
+    "prevalence": 0.6522875816993464,
+    "roc_auc": 0.7548103726249491,
+    "pr_auc": 0.8363473613641929,
+    "brier": 0.21569035176404136,
+    "f1_at_train_threshold": 0.791907514450867,
+    "recall_at_top_decile": 0.13627254509018036
+  },
+  "E_RankAvg_B_LGBM_interactions_A_PerFase": {
+    "n": 765,
+    "prevalence": 0.6522875816993464,
+    "roc_auc": 0.7660659665195051,
+    "pr_auc": 0.8520047388053997,
+    "brier": 0.2094013891087641,
+    "f1_at_train_threshold": 0.7944936086529006,
+    "recall_at_top_decile": 0.13827655310621242
+  },
+  "E_RankAvg_C_DART_D_GOSS": {
+    "n": 765,
+    "prevalence": 0.6522875816993464,
+    "roc_auc": 0.7499208944204196,
+    "pr_auc": 0.8380075190278077,
+    "brier": 0.21730488357502853,
+    "f1_at_train_threshold": 0.7925233644859813,
+    "recall_at_top_decile": 0.14228456913827656
+  },
+  "E_Hybrid_B_PerFase02": {
+    "n": 765,
+    "prevalence": 0.6522875816993464,
+    "roc_auc": 0.7555599921647808,
+    "pr_auc": 0.854262616595041,
+    "brier": 0.20911056533606487,
+    "f1_at_train_threshold": 0.7817531305903399,
+    "recall_at_top_decile": 0.14428857715430862
+  }
+}

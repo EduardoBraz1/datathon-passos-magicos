@@ -1,0 +1,30 @@
+[project]
+name = "passos-magicos-risk-model"
+version = "0.1.0"
+description = "Modelo preditivo de risco acadêmico (defasagem) para a ONG Passos Mágicos."
+readme = "README.md"
+requires-python = ">=3.12"
+authors = [
+  { name = "FIAP Datathon – Passos Mágicos team" },
+]
+
+dependencies = [
+  "pandas==3.0.0",
+  "numpy==2.4.0",
+  "scikit-learn==1.8.0",
+  "lightgbm==4.6.0",
+  "xgboost==3.2.0",
+  "torch==2.11.0",
+  "shap==0.51.0",
+  "joblib==1.5.2",
+  "matplotlib==3.10.7",
+  "seaborn==0.13.2",
+  "openpyxl>=3.1.5",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/risk_model"]

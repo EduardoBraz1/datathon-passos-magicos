@@ -1,0 +1,13 @@
+{
+  "n_features": 136,
+  "history_len": 33,
+  "operational_threshold": 0.59,
+  "architecture": "Linear(n\u2192256)\u2192BN\u2192GELU\u2192Drop(0.3)\u2192Linear(\u2192128)\u2192BN\u2192GELU\u2192Drop(0.3)\u2192Linear(\u219264)\u2192GELU\u2192Drop(0.2)\u2192Linear(\u21921)",
+  "device": "cpu",
+  "optimizer": "AdamW(lr=1e-3, wd=1e-4)",
+  "scheduler": "OneCycleLR(max_lr=3e-3, pct_start=0.30)",
+  "loss": "BCEWithLogitsLoss(pos_weight=neg/pos)",
+  "batch_size": 64,
+  "max_epochs": 200,
+  "patience": 20
+}
