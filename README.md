@@ -33,7 +33,7 @@ Desenvolvemos um pipeline robusto de Machine Learning para prever o risco futuro
 ## 💻 Como executar localmente
 1. Clone este repositório:
    ```bash
-   git clone [https://github.com/EduardoBraz1/datathon-passos-magicos.git](https://github.com/EduardoBraz1/datathon-passos-magicos.git)
+   git clone https://github.com/EduardoBraz1/datathon-passos-magicos.git
    cd datathon-passos-magicos
    ```
 2. Instale as dependências:
