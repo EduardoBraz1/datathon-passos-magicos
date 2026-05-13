@@ -9,8 +9,8 @@ Nosso objetivo foi além de analisar o passado; nós criamos um sistema capaz de
 Através da Análise Exploratória e do nosso Painel Executivo, diagnosticamos 4 alavancas cruciais da operação:
 1. **O Gargalo da Fase 3:** Queda brusca de desempenho (IDA) no 7º/8º ano, a fase de maior risco.
 2. **O Custo Emocional da Defasagem:** Provamos a correlação direta entre o atraso escolar e a deterioração da saúde psicossocial (IPS).
-3. **O Viés de Otimismo (+1.55 pts):** Descobrimos que os alunos superestimam suas notas (IAA) em relação à realidade (IDA).
-4. **A Batalha dos Profissionais:** A avaliação do professor (IPP - 0.37) tem peso estatisticamente maior no sucesso do aluno do que o contexto social (IPS - 0.02).
+3. **O Viés de Otimismo:** Descobrimos que os alunos superestimam suas notas (IAA) em relação à realidade (IDA).
+4. **A Batalha dos Profissionais:** A avaliação do professor (IPP) tem peso estatisticamente maior no sucesso do aluno do que o contexto social (IPS).
 
 ## 🤖 Parte 2: Predição de Risco (Machine Learning)
 Desenvolvemos um pipeline robusto de Machine Learning para prever o risco futuro dos alunos em 2025:
