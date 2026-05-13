@@ -2,6 +2,12 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
+st.page_link(
+    "streamlit_app.py",
+    label="⬅️ Voltar para Home",
+    icon="🏠"
+)
+
 st.title("👤 Análise Individual do Aluno")
 
 # carregar dados

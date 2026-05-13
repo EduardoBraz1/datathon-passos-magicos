@@ -3,6 +3,12 @@ import pandas as pd
 import numpy as np
 import joblib
 
+st.page_link(
+    "streamlit_app.py",
+    label="⬅️ Voltar para Home",
+    icon="🏠"
+)
+
 # =========================
 # CARREGAR MODELO
 # =========================
